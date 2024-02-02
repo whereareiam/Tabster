@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.whereareiam</groupId>
+    <artifactId>Tabster</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!-- Project config -->
+        <testDir>/Users/whereareiam/Projects/TestP/local/templates/Proxy/default/plugins</testDir>
+
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Maven version -->
+        <maven.compiler.version>3.12.1</maven.compiler.version>
+        <maven.shade.version>3.5.1</maven.shade.version>
+        <maven.assembly.version>3.3.0</maven.assembly.version>
+        <maven.antrun.version>3.1.0</maven.antrun.version>
+        <maven.resources.version>3.3.1</maven.resources.version>
+        <maven.source.version>3.6.3</maven.source.version>
+
+        <!-- Dependencies -->
+        <guice.version>7.0.0</guice.version>
+        <serializer.version>1.1.1</serializer.version>
+
+        <!-- core -->
+        <acf-paper.version>0.5.1</acf-paper.version>
+        <bstats-bukkit.version>3.0.2</bstats-bukkit.version>
+
+        <!-- velocity -->
+        <velocity.version>3.3.0</velocity.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>velocity-dev</id>
+            <modules>
+                <module>core</module>
+                <module>velocity</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <modules>
+                <module>core</module>
+                <module>velocity</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>release</id>
+            <modules>
+                <module>core</module>
+                <module>velocity</module>
+            </modules>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <!-- Velocity -->
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <!-- ACF -->
+        <repository>
+            <id>aikar</id>
+            <url>https://repo.aikar.co/content/groups/aikar/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.elytrium</groupId>
+            <artifactId>serializer</artifactId>
+            <version>${serializer.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
