@@ -7,5 +7,5 @@
     "whereareiam"
   ],
   "dependencies": [],
-  "main": "me.whereareiam.tabster.velocity.Tabster"
+  "main": "me.whereareiam.tabster.velocity.TabsterVelocity"
 }

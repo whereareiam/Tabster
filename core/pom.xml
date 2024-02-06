@@ -25,12 +25,6 @@
             <version>${bstats-bukkit.version}</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.velocitypowered</groupId>
-            <artifactId>velocity-api</artifactId>
-            <version>${velocity.version}-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
