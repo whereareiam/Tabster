@@ -11,16 +11,17 @@ import me.whereareiam.tabster.core.type.FilterType;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Singleton
 public class Controller {
 	private final Injector injector;
 	private final Path groupsPath;
 
-	private final List<Group> groups = new ArrayList<>();
+	private final Set<Group> groups = new HashSet<>();
 
 	@Inject
 	public Controller(Injector injector, @Named("dataPath") Path dataPath) {
@@ -65,21 +66,40 @@ public class Controller {
 	private GroupConfig createExampleGroupConfig() {
 		GroupConfig groupConfig = new GroupConfig();
 
-		Group group = new Group();
-		group.id = "example";
+		//Player example group
+		Group player = new Group();
+		player.id = "player";
 
-		Command command = new Command();
-		command.command = "version";
+		Command versionCommand = new Command();
+		versionCommand.command = "version";
 
-		group.commands.add(command);
-		group.tabComplete.add(command);
+		player.commands.add(versionCommand);
+		player.tabComplete.add(versionCommand);
 
-		group.requirements.enabled = true;
-		group.requirements.permission = "";
-		group.requirements.allowedServers = List.of("*");
+		player.requirements.enabled = true;
+		player.requirements.permission = "";
+		player.requirements.allowedServers = List.of("*");
+		player.requirements.request = "Player";
+
+		//Admin example group
+		Group admin = new Group();
+		admin.id = "admin";
+
+		Command velocityCommand = new Command();
+		velocityCommand.command = "velocity";
+
+		admin.commands.add(velocityCommand);
+		admin.tabComplete.add(velocityCommand);
+
+		admin.requirements.enabled = true;
+		admin.requirements.permission = "tabster.admin";
+		admin.requirements.allowedServers = List.of("*");
+		admin.requirements.request = "Admin";
+		admin.extendsGroups.add("player");
 
 		groupConfig.enabled = true;
-		groupConfig.groups.add(group);
+		groupConfig.groups.add(player);
+		groupConfig.groups.add(admin);
 
 		return groupConfig;
 	}
@@ -89,7 +109,7 @@ public class Controller {
 		registerGroups();
 	}
 
-	public List<Group> getGroups() {
+	public Set<Group> getGroups() {
 		return groups;
 	}
 

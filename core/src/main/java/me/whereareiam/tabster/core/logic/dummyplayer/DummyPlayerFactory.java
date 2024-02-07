@@ -6,10 +6,7 @@ import me.whereareiam.tabster.core.logic.Controller;
 import me.whereareiam.tabster.core.model.Group;
 import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Singleton
 public class DummyPlayerFactory {
@@ -38,41 +35,35 @@ public class DummyPlayerFactory {
 	}
 
 	private Set<Group> selectGroups(String username, String server) {
-		if (server.isEmpty())
-			return new HashSet<>();
+		List<Group> sortedGroups = controller.getGroups().stream()
+				.sorted(Comparator.comparing(Group::getPriority).reversed())
+				.toList();
 
-		Set<Group> groups = new HashSet<>();
-		controller.getGroups().forEach(group -> {
+		Set<Group> selectedGroups = new HashSet<>();
+		for (Group group : sortedGroups) {
 			if (!group.requirements.enabled) {
-				groups.add(group);
-				return;
+				continue;
 			}
-			System.out.println("Checking group " + group.id + " for " + username + " on server " + server);
 			if (group.requirements.permission != null && !group.requirements.permission.isEmpty()) {
 				if (!platformPlayerManager.hasPermission(username, group.requirements.permission)) {
-					return;
+					continue;
 				}
 			}
-			System.out.println("Permission check passed");
 			if (!isServerAllowed(server, group.requirements.allowedServers)) {
-				return;
+				continue;
 			}
-			System.out.println("Server check passed");
-			if (group.requirements.extendsIfMetRequirements) {
-				groups.add(group);
+			selectedGroups.add(group);
+			if (group.requirements.requirementExtend) {
 				for (String extendsGroup : group.extendsGroups) {
 					Group extendedGroup = controller.getGroupById(extendsGroup);
 					if (extendedGroup != null) {
-						groups.addAll(selectGroups(username, server));
+						selectedGroups.addAll(selectGroups(username, server));
 					}
 				}
-			} else {
-				groups.add(group);
 			}
-		});
+		}
 
-		System.out.println("Selected groups for " + username + " on server " + server + ": " + groups);
-		return groups;
+		return selectedGroups;
 	}
 
 	private boolean isServerAllowed(String server, List<String> allowedServers) {

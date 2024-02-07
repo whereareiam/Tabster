@@ -9,7 +9,8 @@
 - [ ] Feature: Player infomation command
 - [ ] Feature: Reload command
 - [ ] Feature: Waterfall support
-- [ ] Feature: Where is my command
+- [ ] Feature: Wildcards for commands and completions
 - [ ] Information: Plugin description
 - [ ] Information: Plugin documentation
 - [x] Code: Formatting util
+- [x] Feature: Where is my command

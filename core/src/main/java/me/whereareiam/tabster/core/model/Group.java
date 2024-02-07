@@ -10,7 +10,12 @@ public class Group {
 	public List<Command> commands = new ArrayList<>();
 	public List<Command> tabComplete = new ArrayList<>();
 	public FilterType type = FilterType.WHITELIST;
+	public int priority = 0;
 	public GroupRequirements requirements = new GroupRequirements();
 	public GroupMessages messages = new GroupMessages();
 	public List<String> extendsGroups = new ArrayList<>();
+
+	public int getPriority() {
+		return priority;
+	}
 }
