@@ -4,5 +4,5 @@ import me.whereareiam.tabster.core.type.FilterType;
 
 public class Command {
 	public String command = "";
-	public FilterType filterType = FilterType.INHERIT;
+	public FilterType type = FilterType.INHERIT;
 }

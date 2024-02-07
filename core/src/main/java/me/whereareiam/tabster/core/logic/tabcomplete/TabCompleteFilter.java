@@ -17,7 +17,7 @@ public class TabCompleteFilter {
 
 		for (Group group : dummyPlayer.getGroups()) {
 			for (Command command : group.tabComplete) {
-				FilterType filterType = command.filterType == FilterType.INHERIT ? group.filterType : command.filterType;
+				FilterType filterType = command.type == FilterType.INHERIT ? group.type : command.type;
 				if (filterType == FilterType.WHITELIST) {
 					whitelist.add(command.command);
 				} else if (filterType == FilterType.BLACKLIST) {

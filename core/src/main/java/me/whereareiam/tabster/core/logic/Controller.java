@@ -1,11 +1,13 @@
 package me.whereareiam.tabster.core.logic;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import me.whereareiam.tabster.core.config.GroupConfig;
 import me.whereareiam.tabster.core.model.Command;
 import me.whereareiam.tabster.core.model.Group;
+import me.whereareiam.tabster.core.type.FilterType;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -15,12 +17,14 @@ import java.util.List;
 
 @Singleton
 public class Controller {
+	private final Injector injector;
 	private final Path groupsPath;
 
 	private final List<Group> groups = new ArrayList<>();
 
 	@Inject
-	public Controller(@Named("dataPath") Path dataPath) {
+	public Controller(Injector injector, @Named("dataPath") Path dataPath) {
+		this.injector = injector;
 		this.groupsPath = dataPath.resolve("groups");
 	}
 
@@ -44,7 +48,16 @@ public class Controller {
 			groups.addAll(groupConfig.groups);
 		} else {
 			files.forEach(file -> {
+				GroupConfig groupConfig = injector.getInstance(GroupConfig.class);
+				groupConfig.reload(file.toPath());
+				List<Group> groups = groupConfig.groups.stream()
+						.filter(group -> group.requirements.enabled)
+						.filter(group -> group.type == FilterType.BLACKLIST || group.type == FilterType.WHITELIST)
+						.toList();
 
+				if (!groups.isEmpty()) {
+					this.groups.addAll(groups);
+				}
 			});
 		}
 	}

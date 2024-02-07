@@ -24,7 +24,7 @@ public class CommandFilter {
 	public DummyCommandResult filterCommand(DummyPlayer dummyPlayer, DummyCommandResult command) {
 		for (Group group : dummyPlayer.getGroups()) {
 			for (Command cmd : group.commands) {
-				FilterType filterType = cmd.filterType == FilterType.INHERIT ? group.filterType : cmd.filterType;
+				FilterType filterType = cmd.type == FilterType.INHERIT ? group.type : cmd.type;
 				if (filterType == FilterType.WHITELIST && cmd.command.equals(command.getCommand())) {
 					command.setAllowed(true);
 				} else {

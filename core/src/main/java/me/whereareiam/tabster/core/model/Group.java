@@ -9,7 +9,7 @@ public class Group {
 	public String id = "example";
 	public List<Command> commands = new ArrayList<>();
 	public List<Command> tabComplete = new ArrayList<>();
-	public FilterType filterType = FilterType.WHITELIST;
+	public FilterType type = FilterType.WHITELIST;
 	public GroupRequirements requirements = new GroupRequirements();
 	public GroupMessages messages = new GroupMessages();
 	public List<String> extendsGroups = new ArrayList<>();
