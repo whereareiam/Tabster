@@ -8,16 +8,19 @@ import me.whereareiam.tabster.core.AbstractTabsterConfig;
 import java.nio.file.Path;
 
 public class TabsterVelocityConfig extends AbstractTabsterConfig {
+	private final TabsterVelocity instance;
 	private final ProxyServer proxyServer;
 	private final Path dataPath;
 
-	public TabsterVelocityConfig(ProxyServer proxyServer, Path dataPath) {
+	public TabsterVelocityConfig(TabsterVelocity instance, ProxyServer proxyServer, Path dataPath) {
+		this.instance = instance;
 		this.proxyServer = proxyServer;
 		this.dataPath = dataPath;
 	}
 
 	@Override
 	protected void configure() {
+		bind(TabsterVelocity.class).toInstance(instance);
 		bind(ProxyServer.class).toInstance(proxyServer);
 		bind(EventManager.class).toInstance(proxyServer.getEventManager());
 		bind(Path.class).annotatedWith(Names.named("dataPath")).toInstance(dataPath);

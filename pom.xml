@@ -31,6 +31,7 @@
         <!-- core -->
         <acf-paper.version>0.5.1</acf-paper.version>
         <bstats-bukkit.version>3.0.2</bstats-bukkit.version>
+        <adventure-api.version>4.15.0</adventure-api.version>
 
         <!-- velocity -->
         <velocity.version>3.3.0</velocity.version>

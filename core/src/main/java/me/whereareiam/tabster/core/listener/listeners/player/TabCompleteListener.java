@@ -1,4 +1,4 @@
-package me.whereareiam.tabster.core.listener.listeners.command;
+package me.whereareiam.tabster.core.listener.listeners.player;
 
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 

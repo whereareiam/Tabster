@@ -24,7 +24,7 @@ public class TabsterVelocity extends AbstractTabster {
 
 	@Subscribe
 	public void onProxyInitialization(ProxyInitializeEvent event) {
-		injector = Guice.createInjector(new TabsterVelocityConfig(proxyServer, dataPath));
+		injector = Guice.createInjector(new TabsterVelocityConfig(this, proxyServer, dataPath));
 		super.onProxyInitialization();
 
 		injector.getInstance(VelocityListenerRegistrar.class).registerListeners();

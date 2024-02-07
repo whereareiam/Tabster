@@ -1,7 +1,8 @@
 package me.whereareiam.tabster.core.listener.listeners.command;
 
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
+import me.whereareiam.tabster.core.model.DummyCommandResult;
 
 public interface CommandListener {
-	void onCommand(DummyPlayer dummyPlayer, String command, String[] args);
+	DummyCommandResult onCommand(DummyPlayer dummyPlayer, DummyCommandResult command);
 }
