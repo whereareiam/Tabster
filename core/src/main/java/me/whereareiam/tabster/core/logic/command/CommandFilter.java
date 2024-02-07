@@ -18,17 +18,30 @@ public class CommandFilter {
 	}
 
 	public DummyCommandResult filterCommand(DummyPlayer dummyPlayer, DummyCommandResult command) {
+		boolean isCommandAllowed = false;
+		Group notifyingGroup = null;
+
 		for (Group group : dummyPlayer.getGroups()) {
 			for (Command cmd : group.commands) {
 				FilterType filterType = cmd.type == FilterType.INHERIT ? group.type : cmd.type;
 				if (filterType == FilterType.WHITELIST && cmd.command.equals(command.getCommand())) {
-					command.setAllowed(true);
+					isCommandAllowed = true;
+					break;
 				} else {
-					command.setAllowed(false);
-					commandFilterNotifier.notifyPlayer(dummyPlayer, group, command.getCommand());
+					isCommandAllowed = false;
+					notifyingGroup = group;
 				}
 			}
+			if (isCommandAllowed) {
+				break;
+			}
 		}
+
+		command.setAllowed(isCommandAllowed);
+		if (!isCommandAllowed && notifyingGroup != null) {
+			commandFilterNotifier.notifyPlayer(dummyPlayer, notifyingGroup, command.getCommand());
+		}
+
 		return command;
 	}
 }

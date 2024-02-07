@@ -27,20 +27,26 @@ public class DummyPlayerFactory {
 			return dummyPlayerStorage.getDummyPlayer(username);
 		}
 
-		Set<Group> groups = selectGroups(username, server);
+		Set<Group> groups = selectGroups(username, server, new HashSet<>());
 		DummyPlayer dummyPlayer = new DummyPlayer(username, uniqueId, server, groups);
 		dummyPlayerStorage.addDummyPlayer(dummyPlayer);
 
 		return dummyPlayer;
 	}
 
-	private Set<Group> selectGroups(String username, String server) {
+	private Set<Group> selectGroups(String username, String server, Set<String> processedGroups) {
+		if (server.isEmpty())
+			return new HashSet<>();
+
 		List<Group> sortedGroups = controller.getGroups().stream()
 				.sorted(Comparator.comparing(Group::getPriority).reversed())
 				.toList();
 
 		Set<Group> selectedGroups = new HashSet<>();
 		for (Group group : sortedGroups) {
+			if (processedGroups.contains(group.id)) {
+				continue;
+			}
 			if (!group.requirements.enabled) {
 				continue;
 			}
@@ -52,12 +58,15 @@ public class DummyPlayerFactory {
 			if (!isServerAllowed(server, group.requirements.allowedServers)) {
 				continue;
 			}
+
 			selectedGroups.add(group);
+			processedGroups.add(group.id);
+
 			if (group.requirements.requirementExtend) {
 				for (String extendsGroup : group.extendsGroups) {
 					Group extendedGroup = controller.getGroupById(extendsGroup);
 					if (extendedGroup != null) {
-						selectedGroups.addAll(selectGroups(username, server));
+						selectedGroups.addAll(selectGroups(username, server, processedGroups));
 					}
 				}
 			}
