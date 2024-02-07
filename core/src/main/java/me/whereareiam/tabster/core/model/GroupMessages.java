@@ -1,6 +1,5 @@
 package me.whereareiam.tabster.core.model;
 
 public class GroupMessages {
-	public String noPermission = "You can't use this command group because you don't have the required permission.";
-	public String noServer = "You can't use this command group because you are not on the {server} server.";
+	public String commandBlocked = "<hover:show_text:{groupId}><gold><bold>ᴛᴀʙsᴛᴇʀ</bold> <dark_gray>| <white>Command <red>/{command}</red> is not allowed</hover>";
 }

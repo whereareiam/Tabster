@@ -11,5 +11,6 @@ public class Group {
 	public List<Command> tabComplete = new ArrayList<>();
 	public FilterType filterType = FilterType.WHITELIST;
 	public GroupRequirements requirements = new GroupRequirements();
+	public GroupMessages messages = new GroupMessages();
 	public List<String> extendsGroups = new ArrayList<>();
 }

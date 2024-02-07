@@ -2,7 +2,7 @@ package me.whereareiam.tabster.core.model;
 
 public class DummyCommandResult {
 	private final String command;
-	private final boolean isAllowed;
+	private boolean isAllowed;
 
 	public DummyCommandResult(String command, boolean isAllowed) {
 		this.command = command;
@@ -15,5 +15,9 @@ public class DummyCommandResult {
 
 	public boolean isAllowed() {
 		return isAllowed;
+	}
+	
+	public void setAllowed(boolean isAllowed) {
+		this.isAllowed = isAllowed;
 	}
 }

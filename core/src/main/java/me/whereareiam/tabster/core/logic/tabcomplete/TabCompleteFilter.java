@@ -12,21 +12,10 @@ import java.util.Set;
 @Singleton
 public class TabCompleteFilter {
 	public Set<String> filterTabComplete(DummyPlayer dummyPlayer, Set<String> completions) {
-		System.out.println("Filtering tab completions for " + dummyPlayer.getUsername());
-		System.out.println("Original completions: " + completions);
-		System.out.println("Dummy player group: " + dummyPlayer.getGroups());
-		System.out.println("Dummy player server: " + dummyPlayer.getServer());
-
-		filterCompletions(dummyPlayer.getGroups(), completions);
-
-		return completions;
-	}
-
-	private void filterCompletions(Set<Group> groups, Set<String> completions) {
 		Set<String> whitelist = new HashSet<>();
 		Set<String> blacklist = new HashSet<>();
 
-		for (Group group : groups) {
+		for (Group group : dummyPlayer.getGroups()) {
 			for (Command command : group.tabComplete) {
 				FilterType filterType = command.filterType == FilterType.INHERIT ? group.filterType : command.filterType;
 				if (filterType == FilterType.WHITELIST) {
@@ -42,5 +31,7 @@ public class TabCompleteFilter {
 		} else {
 			completions.removeAll(blacklist);
 		}
+
+		return completions;
 	}
 }
