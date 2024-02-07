@@ -10,7 +10,7 @@ import me.whereareiam.tabster.core.listener.handler.CommandHandler;
 import me.whereareiam.tabster.core.listener.listeners.command.CommandListener;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayerStorage;
-import me.whereareiam.tabster.core.model.DummyCommandResult;
+import me.whereareiam.tabster.core.model.DummyCommand;
 
 @Singleton
 public class CommandExecuteListener implements CommandListener {
@@ -30,18 +30,18 @@ public class CommandExecuteListener implements CommandListener {
 		if (player != null) {
 			DummyPlayer dummyPlayer = dummyPlayerStorage.getDummyPlayer(player.getUsername());
 
-			DummyCommandResult dummyCommandResult = new DummyCommandResult(
+			DummyCommand dummyCommand = new DummyCommand(
 					event.getCommand(),
 					event.getResult().isAllowed()
 			);
 
-			boolean isAllowed = onCommand(dummyPlayer, dummyCommandResult).isAllowed();
+			boolean isAllowed = onCommand(dummyPlayer, dummyCommand).isAllowed();
 			event.setResult(isAllowed ? CommandExecuteEvent.CommandResult.allowed() : CommandExecuteEvent.CommandResult.denied());
 		}
 	}
 
 	@Override
-	public DummyCommandResult onCommand(DummyPlayer dummyPlayer, DummyCommandResult command) {
+	public DummyCommand onCommand(DummyPlayer dummyPlayer, DummyCommand command) {
 		return commandHandler.handleCommandEvent(dummyPlayer, command);
 	}
 }

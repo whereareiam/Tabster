@@ -80,7 +80,7 @@ public class Controller {
 		versionWithSubTestCommand.command = "version test* -";
 
 		player.commands.addAll(List.of(versionCommand, versionWithAllSubsCommand, versionWithSubTestCommand));
-		player.tabComplete.addAll(List.of(versionCommand, versionWithAllSubsCommand, versionWithSubTestCommand));
+		player.tabComplete.add(versionCommand);
 
 		player.requirements.enabled = true;
 		player.requirements.permission = "";

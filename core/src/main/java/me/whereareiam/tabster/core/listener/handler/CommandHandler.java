@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.whereareiam.tabster.core.logic.command.CommandFilter;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
-import me.whereareiam.tabster.core.model.DummyCommandResult;
+import me.whereareiam.tabster.core.model.DummyCommand;
 
 @Singleton
 public class CommandHandler {
@@ -15,7 +15,7 @@ public class CommandHandler {
 		this.commandFilter = commandFilter;
 	}
 
-	public DummyCommandResult handleCommandEvent(DummyPlayer dummyPlayer, DummyCommandResult command) {
+	public DummyCommand handleCommandEvent(DummyPlayer dummyPlayer, DummyCommand command) {
 		return commandFilter.filterCommand(dummyPlayer, command);
 	}
 }

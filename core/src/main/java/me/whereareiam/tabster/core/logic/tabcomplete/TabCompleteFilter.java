@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Singleton
 public class TabCompleteFilter {
-	public Set<String> filterTabComplete(DummyPlayer dummyPlayer, Set<String> completions) {
+	public Set<String> filterTabComplete(DummyPlayer dummyPlayer, Set<String> commands) {
 		Set<String> whitelist = new HashSet<>();
 		Set<String> blacklist = new HashSet<>();
 
@@ -27,11 +27,11 @@ public class TabCompleteFilter {
 		}
 
 		if (!whitelist.isEmpty()) {
-			completions.retainAll(whitelist);
+			commands.retainAll(whitelist);
 		} else {
-			completions.removeAll(blacklist);
+			commands.removeAll(blacklist);
 		}
 
-		return completions;
+		return commands;
 	}
 }
