@@ -39,5 +39,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Socialismus-b${{ github.run_number }}
+          name: Tabster-b${{ github.run_number }}
           path: ${{ github.workspace }}/*.jar
