@@ -79,4 +79,8 @@ public class Controller {
 	public List<Group> getGroups() {
 		return groups;
 	}
+
+	public Group getGroupById(String id) {
+		return groups.stream().filter(group -> group.id.equals(id)).findFirst().orElse(null);
+	}
 }

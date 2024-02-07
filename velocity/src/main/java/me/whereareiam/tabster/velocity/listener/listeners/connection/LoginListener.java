@@ -29,7 +29,7 @@ public class LoginListener implements JoinListener {
 		onJoin(dummyPlayerFactory.createDummyPlayer(
 				player.getUsername(),
 				player.getUniqueId(),
-				player.getCurrentServer().get().getServerInfo().getName()
+				""
 		));
 	}
 

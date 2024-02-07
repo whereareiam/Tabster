@@ -31,14 +31,14 @@ public abstract class AbstractListenerRegistrar {
 	protected abstract CommandListener getCommandListener();
 
 	public void registerListeners() {
-		platformEventManager.registerEvent(getJoinListener().getClass());
-		platformEventManager.registerEvent(getQuitListener().getClass());
-		platformEventManager.registerEvent(getServerSwitchListener().getClass());
+		platformEventManager.registerEvent(getJoinListener());
+		platformEventManager.registerEvent(getQuitListener());
+		platformEventManager.registerEvent(getServerSwitchListener());
 
 		if (TabCompleteListenerState.isRequired())
-			platformEventManager.registerEvent(getTabCompleteListener().getClass());
+			platformEventManager.registerEvent(getTabCompleteListener());
 
 		if (CommandListenerState.isRequired())
-			platformEventManager.registerEvent(getCommandListener().getClass());
+			platformEventManager.registerEvent(getCommandListener());
 	}
 }

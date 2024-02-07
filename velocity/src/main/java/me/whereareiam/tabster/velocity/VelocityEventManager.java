@@ -18,12 +18,12 @@ public class VelocityEventManager extends PlatformEventManager {
 	}
 
 	@Override
-	public void registerEvent(Class<?> eventListener) {
+	public void registerEvent(Object eventListener) {
 		eventManager.register(tabsterVelocity, eventListener);
 	}
 
 	@Override
-	public void unregisterEvent(Class<?> eventListener) {
+	public void unregisterEvent(Object eventListener) {
 		eventManager.unregisterListener(tabsterVelocity, eventListener);
 	}
 }

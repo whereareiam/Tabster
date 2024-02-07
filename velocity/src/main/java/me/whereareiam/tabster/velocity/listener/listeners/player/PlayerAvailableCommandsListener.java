@@ -2,6 +2,7 @@ package me.whereareiam.tabster.velocity.listener.listeners.player;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.mojang.brigadier.tree.CommandNode;
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.PlayerAvailableCommandsEvent;
@@ -28,13 +29,17 @@ public class PlayerAvailableCommandsListener implements TabCompleteListener {
 	@Subscribe(order = PostOrder.EARLY)
 	public void onTabComplete(PlayerAvailableCommandsEvent event) {
 		Player player = event.getPlayer();
-		Set<String> completions = event.getRootNode().getChildren().stream().map(Object::toString).collect(Collectors.toSet());
 
-		onTabComplete(dummyPlayerStorage.getDummyPlayer(player.getUsername()), completions);
+		Set<String> completions = onTabComplete(
+				dummyPlayerStorage.getDummyPlayer(player.getUsername()),
+				event.getRootNode().getChildren().stream().map(CommandNode::getName).collect(Collectors.toSet())
+		);
+
+		event.getRootNode().getChildren().removeIf(node -> !completions.contains(node.getName()));
 	}
 
 	@Override
-	public void onTabComplete(DummyPlayer dummyPlayer, Set<String> completions) {
-		tabCompleteHandler.handleTabCompleteEvent(dummyPlayer, completions);
+	public Set<String> onTabComplete(DummyPlayer dummyPlayer, Set<String> completions) {
+		return tabCompleteHandler.handleTabCompleteEvent(dummyPlayer, completions);
 	}
 }

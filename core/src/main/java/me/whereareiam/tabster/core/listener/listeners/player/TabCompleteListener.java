@@ -5,5 +5,5 @@ import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 import java.util.Set;
 
 public interface TabCompleteListener {
-	void onTabComplete(DummyPlayer dummyPlayer, Set<String> completions);
+	Set<String> onTabComplete(DummyPlayer dummyPlayer, Set<String> completions);
 }
