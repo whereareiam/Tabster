@@ -6,7 +6,6 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.util.Optional;
 
@@ -27,11 +26,9 @@ public class VelocityPlayerManager extends PlatformPlayerManager {
 	}
 
 	@Override
-	public void sendMessage(String username, String message) {
+	public void sendMessage(String username, Component message) {
 		Optional<Player> player = proxyServer.getPlayer(username);
 
-		Component component = MiniMessage.miniMessage().deserialize(message);
-
-		player.ifPresent(value -> value.sendMessage(component));
+		player.ifPresent(value -> value.sendMessage(message));
 	}
 }

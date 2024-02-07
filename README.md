@@ -2,7 +2,7 @@
 
 # TODO
 
-- [ ] Code: Formatting util
+- [x] Code: Formatting util
 - [ ] Code: Integration: bStats
 - [ ] Code: Logging
 - [ ] Feature: API

@@ -8,13 +8,16 @@ import me.whereareiam.tabster.core.model.DummyCommandResult;
 import me.whereareiam.tabster.core.model.Group;
 import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
 import me.whereareiam.tabster.core.type.FilterType;
+import me.whereareiam.tabster.core.util.FormatterUtil;
 
 @Singleton
 public class CommandFilter {
+	private final FormatterUtil formatterUtil;
 	private final PlatformPlayerManager platformPlayerManager;
 
 	@Inject
-	public CommandFilter(PlatformPlayerManager platformPlayerManager) {
+	public CommandFilter(FormatterUtil formatterUtil, PlatformPlayerManager platformPlayerManager) {
+		this.formatterUtil = formatterUtil;
 		this.platformPlayerManager = platformPlayerManager;
 	}
 
@@ -24,9 +27,6 @@ public class CommandFilter {
 				FilterType filterType = cmd.filterType == FilterType.INHERIT ? group.filterType : cmd.filterType;
 				if (filterType == FilterType.WHITELIST && cmd.command.equals(command.getCommand())) {
 					command.setAllowed(true);
-				} else if (filterType == FilterType.BLACKLIST && cmd.command.equals(command.getCommand())) {
-					command.setAllowed(false);
-					notifyBlockedCommandPlayer(dummyPlayer, group, command.getCommand());
 				} else {
 					command.setAllowed(false);
 					notifyBlockedCommandPlayer(dummyPlayer, group, command.getCommand());
@@ -37,9 +37,13 @@ public class CommandFilter {
 	}
 
 	private void notifyBlockedCommandPlayer(DummyPlayer dummyPlayer, Group group, String command) {
-		platformPlayerManager.sendMessage(dummyPlayer.getUsername(), group.messages.commandBlocked
+		String message = group.messages.commandBlocked
 				.replace("{command}", command)
-				.replace("{groupId}", group.id)
-		);
+				.replace("{groupId}", group.id);
+
+		if (message.isBlank() || message.isEmpty())
+			return;
+
+		platformPlayerManager.sendMessage(dummyPlayer.getUsername(), formatterUtil.formatMessage(message));
 	}
 }
