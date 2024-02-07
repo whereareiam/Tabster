@@ -73,8 +73,14 @@ public class Controller {
 		Command versionCommand = new Command();
 		versionCommand.command = "version";
 
-		player.commands.add(versionCommand);
-		player.tabComplete.add(versionCommand);
+		Command versionWithAllSubsCommand = new Command();
+		versionWithAllSubsCommand.command = "version * -";
+
+		Command versionWithSubTestCommand = new Command();
+		versionWithSubTestCommand.command = "version test* -";
+
+		player.commands.addAll(List.of(versionCommand, versionWithAllSubsCommand, versionWithSubTestCommand));
+		player.tabComplete.addAll(List.of(versionCommand, versionWithAllSubsCommand, versionWithSubTestCommand));
 
 		player.requirements.enabled = true;
 		player.requirements.permission = "";
