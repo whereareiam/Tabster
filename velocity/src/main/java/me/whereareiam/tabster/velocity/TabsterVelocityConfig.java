@@ -4,6 +4,7 @@ import com.google.inject.name.Names;
 import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import me.whereareiam.tabster.core.AbstractTabster;
 import me.whereareiam.tabster.core.AbstractTabsterConfig;
 import me.whereareiam.tabster.core.command.base.CommandHelper;
 import me.whereareiam.tabster.core.command.management.AbstractCommandManager;
@@ -37,11 +38,12 @@ public class TabsterVelocityConfig extends AbstractTabsterConfig {
 	@Override
 	protected void configure() {
 		bind(TabsterVelocity.class).toInstance(instance);
+		bind(AbstractTabster.class).to(TabsterVelocity.class);
 		bind(ProxyServer.class).toInstance(proxyServer);
 		bind(EventManager.class).toInstance(proxyServer.getEventManager());
 		bind(Path.class).annotatedWith(Names.named("dataPath")).toInstance(dataPath);
 		bind(Path.class).annotatedWith(DataDirectory.class).toInstance(dataPath);
-		
+
 		// Logging
 		bind(Logger.class).toInstance(logger);
 		bind(LoggerUtil.class).to(VelocityLoggerUtil.class);

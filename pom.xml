@@ -32,6 +32,7 @@
         <!-- core -->
         <acf-paper.version>0.5.1</acf-paper.version>
         <adventure.version>4.15.0</adventure.version>
+        <luckperms.version>5.4</luckperms.version>
 
         <!-- velocity -->
         <velocity.version>3.3.0</velocity.version>

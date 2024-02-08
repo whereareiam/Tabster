@@ -31,6 +31,12 @@
             <version>${adventure.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>${luckperms.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

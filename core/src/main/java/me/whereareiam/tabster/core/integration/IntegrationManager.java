@@ -4,9 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import me.whereareiam.tabster.core.integration.bstats.bStats;
+import me.whereareiam.tabster.core.integration.luckperms.LuckPerms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Singleton
@@ -17,8 +17,8 @@ public class IntegrationManager {
 	@Inject
 	public IntegrationManager(Injector injector) {
 		injector.getInstance(bStats.class).initialize();
-		List<Class<? extends Integration>> integrations = Arrays.asList(
-				//For now empty
+		List<Class<? extends Integration>> integrations = List.of(
+				LuckPerms.class
 		);
 
 		for (Class<? extends Integration> integrationClass : integrations) {
