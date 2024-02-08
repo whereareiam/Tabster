@@ -10,6 +10,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.whereareiam.tabster.core.AbstractTabster;
 import me.whereareiam.tabster.velocity.listener.VelocityListenerRegistrar;
+import org.slf4j.Logger;
 
 import java.nio.file.Path;
 
@@ -24,16 +25,18 @@ import java.nio.file.Path;
 public class TabsterVelocity extends AbstractTabster {
 	private final ProxyServer proxyServer;
 	private final Path dataPath;
+	private final Logger logger;
 
 	@Inject
-	public TabsterVelocity(ProxyServer proxyServer, @DataDirectory Path dataPath) {
+	public TabsterVelocity(ProxyServer proxyServer, @DataDirectory Path dataPath, Logger logger) {
 		this.proxyServer = proxyServer;
 		this.dataPath = dataPath;
+		this.logger = logger;
 	}
 
 	@Subscribe
 	public void onProxyInitialization(ProxyInitializeEvent event) {
-		injector = Guice.createInjector(new TabsterVelocityConfig(this, proxyServer, dataPath));
+		injector = Guice.createInjector(new TabsterVelocityConfig(this, proxyServer, dataPath, logger));
 		super.onProxyInitialization();
 
 		injector.getInstance(VelocityListenerRegistrar.class).registerListeners();

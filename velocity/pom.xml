@@ -24,6 +24,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-velocity</artifactId>
+            <version>${bstats.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
             <version>${velocity.version}-SNAPSHOT</version>
@@ -91,7 +97,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>me.whereareiam.tabster.integration.bstats</shadedPattern>
+                            <shadedPattern>me.whereareiam.tabster.velocity.integration.bstats</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
