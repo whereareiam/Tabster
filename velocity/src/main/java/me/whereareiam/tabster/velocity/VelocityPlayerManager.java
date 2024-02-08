@@ -1,5 +1,6 @@
 package me.whereareiam.tabster.velocity;
 
+import co.aikar.commands.CommandIssuer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.velocitypowered.api.proxy.Player;
@@ -30,5 +31,14 @@ public class VelocityPlayerManager extends PlatformPlayerManager {
 		Optional<Player> player = proxyServer.getPlayer(username);
 
 		player.ifPresent(value -> value.sendMessage(message));
+	}
+
+	@Override
+	public void sendMessage(CommandIssuer commandIssuer, Component message) {
+		if (commandIssuer.isPlayer()) {
+			Player player = commandIssuer.getIssuer();
+			player.sendMessage(message);
+		}
+
 	}
 }

@@ -1,6 +1,7 @@
 package me.whereareiam.tabster.core;
 
 import com.google.inject.Injector;
+import me.whereareiam.tabster.core.command.management.CommandRegistrar;
 import me.whereareiam.tabster.core.config.ConfigManager;
 import me.whereareiam.tabster.core.config.setting.SettingsConfig;
 import me.whereareiam.tabster.core.listener.state.CommandListenerState;
@@ -20,6 +21,8 @@ public abstract class AbstractTabster {
 
 		if (settingsConfig.allowTabCompleteFiltering)
 			TabCompleteListenerState.setRequired(true);
+		
+		injector.getInstance(CommandRegistrar.class).registerCommands();
 	}
 
 	protected void onProxyShutdown() {

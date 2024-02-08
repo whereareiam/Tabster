@@ -18,6 +18,12 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
+            <groupId>co.aikar</groupId>
+            <artifactId>acf-velocity</artifactId>
+            <version>${acf-paper.version}-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
             <version>${velocity.version}-SNAPSHOT</version>

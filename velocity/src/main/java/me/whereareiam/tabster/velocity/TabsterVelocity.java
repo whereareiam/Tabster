@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
+import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.whereareiam.tabster.core.AbstractTabster;
@@ -12,6 +13,14 @@ import me.whereareiam.tabster.velocity.listener.VelocityListenerRegistrar;
 
 import java.nio.file.Path;
 
+@Plugin(
+		id = "tabster",
+		name = "Tabster",
+		version = "0.0.1",
+		authors = {
+				"whereareiam"
+		}
+)
 public class TabsterVelocity extends AbstractTabster {
 	private final ProxyServer proxyServer;
 	private final Path dataPath;
