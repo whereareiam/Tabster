@@ -10,9 +10,13 @@ import me.whereareiam.tabster.core.command.management.AbstractCommandManager;
 import me.whereareiam.tabster.core.integration.bstats.bStats;
 import me.whereareiam.tabster.core.platform.PlatformEventManager;
 import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
+import me.whereareiam.tabster.core.util.LoggerUtil;
 import me.whereareiam.tabster.velocity.command.base.VelocityCommandHelper;
 import me.whereareiam.tabster.velocity.command.management.VelocityCommandManager;
 import me.whereareiam.tabster.velocity.integration.bstats.VelocityBStats;
+import me.whereareiam.tabster.velocity.platform.VelocityEventManager;
+import me.whereareiam.tabster.velocity.platform.VelocityPlayerManager;
+import me.whereareiam.tabster.velocity.util.VelocityLoggerUtil;
 import org.slf4j.Logger;
 
 import java.nio.file.Path;
@@ -37,7 +41,10 @@ public class TabsterVelocityConfig extends AbstractTabsterConfig {
 		bind(EventManager.class).toInstance(proxyServer.getEventManager());
 		bind(Path.class).annotatedWith(Names.named("dataPath")).toInstance(dataPath);
 		bind(Path.class).annotatedWith(DataDirectory.class).toInstance(dataPath);
+		
+		// Logging
 		bind(Logger.class).toInstance(logger);
+		bind(LoggerUtil.class).to(VelocityLoggerUtil.class);
 
 		super.configure();
 

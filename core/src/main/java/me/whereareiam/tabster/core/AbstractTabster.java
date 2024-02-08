@@ -25,9 +25,10 @@ public abstract class AbstractTabster {
 
 		injector.getInstance(CommandRegistrar.class).registerCommands();
 		injector.getInstance(IntegrationManager.class);
+		injector.getInstance(Updater.class);
 	}
 
 	protected void onProxyShutdown() {
-
+		injector.getInstance(Scheduler.class).shutdown();
 	}
 }

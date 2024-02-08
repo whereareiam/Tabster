@@ -41,6 +41,12 @@
                 <version>${maven.resources.version}</version>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <finalName>${project.parent.artifactId}Core-${project.parent.version}</finalName>
     </build>
 </project>

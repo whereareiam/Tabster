@@ -1,4 +1,4 @@
-package me.whereareiam.tabster.velocity;
+package me.whereareiam.tabster.velocity.platform;
 
 import co.aikar.commands.CommandIssuer;
 import com.google.inject.Inject;

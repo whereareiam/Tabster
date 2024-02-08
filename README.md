@@ -2,8 +2,6 @@
 
 # TODO
 
-- [ ] Code: Logging
-- [ ] Code: Update checker
 - [ ] Feature: API
 - [ ] Feature: PaperMC support
 - [ ] Feature: SpigotMC support
@@ -11,6 +9,8 @@
 - [ ] Information: Plugin description
 - [ ] Information: Plugin documentation
 - [x] Code: Formatting util
+- [x] Code: Logging
+- [x] Code: Update checker
 - [x] Feature: Force update command
 - [x] Feature: Player infomation command
 - [x] Feature: Reload command

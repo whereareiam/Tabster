@@ -9,12 +9,12 @@ import me.whereareiam.tabster.core.listener.listeners.connection.JoinListener;
 import me.whereareiam.tabster.core.listener.listeners.connection.QuitListener;
 import me.whereareiam.tabster.core.listener.listeners.connection.ServerSwitchListener;
 import me.whereareiam.tabster.core.listener.listeners.player.TabCompleteListener;
-import me.whereareiam.tabster.velocity.VelocityEventManager;
 import me.whereareiam.tabster.velocity.listener.listeners.command.CommandExecuteListener;
 import me.whereareiam.tabster.velocity.listener.listeners.connection.DisconnectListener;
 import me.whereareiam.tabster.velocity.listener.listeners.connection.LoginListener;
 import me.whereareiam.tabster.velocity.listener.listeners.connection.ServerPreConnectListener;
 import me.whereareiam.tabster.velocity.listener.listeners.player.PlayerAvailableCommandsListener;
+import me.whereareiam.tabster.velocity.platform.VelocityEventManager;
 
 @Singleton
 public class VelocityListenerRegistrar extends AbstractListenerRegistrar {

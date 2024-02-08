@@ -1,10 +1,11 @@
-package me.whereareiam.tabster.velocity;
+package me.whereareiam.tabster.velocity.platform;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.whereareiam.tabster.core.platform.PlatformEventManager;
+import me.whereareiam.tabster.velocity.TabsterVelocity;
 
 @Singleton
 public class VelocityEventManager extends PlatformEventManager {
