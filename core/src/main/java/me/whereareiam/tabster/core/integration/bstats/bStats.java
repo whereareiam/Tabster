@@ -6,6 +6,7 @@ import me.whereareiam.tabster.core.integration.Integration;
 import me.whereareiam.tabster.core.integration.IntegrationType;
 import me.whereareiam.tabster.core.integration.bstats.chart.Chart;
 import me.whereareiam.tabster.core.integration.bstats.chart.GroupCountChart;
+import me.whereareiam.tabster.core.integration.bstats.chart.MostUsedFilter;
 
 public abstract class bStats implements Integration {
 	private final Injector injector;
@@ -34,5 +35,6 @@ public abstract class bStats implements Integration {
 
 	protected void registerCharts() {
 		registerChart(injector.getInstance(GroupCountChart.class));
+		registerChart(injector.getInstance(MostUsedFilter.class));
 	}
 }
