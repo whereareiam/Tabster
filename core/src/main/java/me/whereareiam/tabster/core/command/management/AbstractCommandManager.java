@@ -59,4 +59,8 @@ public abstract class AbstractCommandManager {
 	public Map<RootCommand, Set<RegisteredCommand>> getAllCommands() {
 		return commandsMap;
 	}
+
+	public int getCommandCount() {
+		return commandCount;
+	}
 }

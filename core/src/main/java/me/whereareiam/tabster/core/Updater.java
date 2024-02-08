@@ -6,13 +6,10 @@ import me.whereareiam.tabster.core.config.setting.SettingsConfig;
 import me.whereareiam.tabster.core.util.LoggerUtil;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
@@ -37,13 +34,7 @@ public class Updater {
 			return;
 		}
 
-		Properties prop = new Properties();
-		try (InputStream input = getClass().getClassLoader().getResourceAsStream("version.properties")) {
-			prop.load(input);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		final String currentVersion = prop.getProperty("version");
+		final String currentVersion = AbstractTabster.version;
 
 		if (compareVersions(currentVersion, latestVersion) > 0) {
 			loggerUtil.info("You are on a dev build.");

@@ -27,7 +27,7 @@ public class CacheInterceptor implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		String methodName = invocation.getMethod().getName();
 
-		if (!settingsConfig.perfomance.caching) {
+		if (!settingsConfig.performance.caching) {
 			return invocation.proceed();
 		}
 

@@ -5,9 +5,10 @@ import net.elytrium.serializer.language.object.YamlSerializable;
 
 @Singleton
 public class SettingsConfig extends YamlSerializable {
-	public int logLevel = 2;
+	public int logLevel = 0;
 	public boolean updateChecker = true;
-	public PerfomanceSettingsConfig perfomance = new PerfomanceSettingsConfig();
 	public boolean allowCommandFiltering = true;
 	public boolean allowTabCompleteFiltering = true;
+	
+	public PerfomanceSettingsConfig performance = new PerfomanceSettingsConfig();
 }

@@ -8,11 +8,25 @@ import me.whereareiam.tabster.core.integration.IntegrationManager;
 import me.whereareiam.tabster.core.listener.state.CommandListenerState;
 import me.whereareiam.tabster.core.listener.state.TabCompleteListenerState;
 import me.whereareiam.tabster.core.logic.Controller;
+import me.whereareiam.tabster.core.util.InfoPrinterUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public abstract class AbstractTabster {
+	public static String version;
 	protected Injector injector;
 
 	protected void onProxyInitialization() {
+		Properties prop = new Properties();
+		try (InputStream input = getClass().getClassLoader().getResourceAsStream("version.properties")) {
+			prop.load(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		version = prop.getProperty("version");
+
 		injector.getInstance(ConfigManager.class).reloadConfigs();
 		injector.getInstance(Controller.class).initialize();
 
@@ -26,6 +40,8 @@ public abstract class AbstractTabster {
 		injector.getInstance(CommandRegistrar.class).registerCommands();
 		injector.getInstance(IntegrationManager.class);
 		injector.getInstance(Updater.class);
+
+		injector.getInstance(InfoPrinterUtil.class).printStartMessage();
 	}
 
 	protected void onProxyShutdown() {
