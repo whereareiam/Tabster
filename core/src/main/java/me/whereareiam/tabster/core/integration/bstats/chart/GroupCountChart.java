@@ -1,5 +1,6 @@
 package me.whereareiam.tabster.core.integration.bstats.chart;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.whereareiam.tabster.core.logic.Controller;
 
@@ -7,6 +8,7 @@ import me.whereareiam.tabster.core.logic.Controller;
 public class GroupCountChart implements Chart {
 	private final Controller controller;
 
+	@Inject
 	public GroupCountChart(Controller controller) {
 		this.controller = controller;
 	}
