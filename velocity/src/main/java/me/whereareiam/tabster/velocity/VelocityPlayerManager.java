@@ -6,17 +6,21 @@ import com.google.inject.Singleton;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
+import me.whereareiam.tabster.core.util.FormatterUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 
 import java.util.Optional;
 
 @Singleton
 public class VelocityPlayerManager extends PlatformPlayerManager {
 	private final ProxyServer proxyServer;
+	private final FormatterUtil formatterUtil;
 
 	@Inject
-	public VelocityPlayerManager(ProxyServer proxyServer) {
+	public VelocityPlayerManager(ProxyServer proxyServer, FormatterUtil formatterUtil) {
 		this.proxyServer = proxyServer;
+		this.formatterUtil = formatterUtil;
 	}
 
 	@Override
@@ -38,7 +42,10 @@ public class VelocityPlayerManager extends PlatformPlayerManager {
 		if (commandIssuer.isPlayer()) {
 			Player player = commandIssuer.getIssuer();
 			player.sendMessage(message);
+		} else {
+			commandIssuer.sendMessage(
+					formatterUtil.cleanMessage(PlainTextComponentSerializer.plainText().serialize(message))
+			);
 		}
-
 	}
 }

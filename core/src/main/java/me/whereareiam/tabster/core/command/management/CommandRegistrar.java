@@ -3,6 +3,8 @@ package me.whereareiam.tabster.core.command.management;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import me.whereareiam.tabster.core.command.commands.ForceUpdateCommand;
+import me.whereareiam.tabster.core.command.commands.InfoCommand;
 import me.whereareiam.tabster.core.command.commands.MainCommand;
 import me.whereareiam.tabster.core.command.commands.ReloadCommand;
 
@@ -20,6 +22,8 @@ public class CommandRegistrar {
 	public void registerCommands() {
 		commandManager.registerCommand(injector.getInstance(MainCommand.class));
 		commandManager.registerCommand(injector.getInstance(ReloadCommand.class));
+		commandManager.registerCommand(injector.getInstance(InfoCommand.class));
+		commandManager.registerCommand(injector.getInstance(ForceUpdateCommand.class));
 
 		commandManager.setCommands();
 	}

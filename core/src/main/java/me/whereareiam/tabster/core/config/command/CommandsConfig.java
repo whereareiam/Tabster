@@ -7,4 +7,6 @@ import net.elytrium.serializer.language.object.YamlSerializable;
 public class CommandsConfig extends YamlSerializable {
 	public ReloadCommandConfig reloadCommand = new ReloadCommandConfig();
 	public MainCommandConfig mainCommand = new MainCommandConfig();
+	public ForceUpdateCommandConfig forceUpdateCommand = new ForceUpdateCommandConfig();
+	public InfoCommandConfig infoCommand = new InfoCommandConfig();
 }

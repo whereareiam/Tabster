@@ -37,12 +37,8 @@ public class ReloadCommand extends AbstractCommandBase {
 	@CommandPermission("%permission.reload")
 	@Description("%description.reload")
 	public void onCommand(CommandIssuer issuer) {
-		if (issuer.isPlayer()) {
-			platformPlayerManager.sendMessage((CommandIssuer) issuer.getIssuer(),
-					formatterUtil.formatMessage(messages.commands.reloadCommand.reloadedSuccessfully));
-		} else {
-			issuer.sendMessage(formatterUtil.cleanMessage(messages.commands.reloadCommand.reloadedSuccessfully));
-		}
+		platformPlayerManager.sendMessage(issuer,
+				formatterUtil.formatMessage(messages.commands.reloadCommand.reloadedSuccessfully));
 
 		controller.reload();
 	}

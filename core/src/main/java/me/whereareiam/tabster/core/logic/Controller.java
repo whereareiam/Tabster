@@ -91,11 +91,11 @@ public class Controller {
 		Group admin = new Group();
 		admin.id = "admin";
 
-		Command velocityCommand = new Command();
-		velocityCommand.command = "velocity";
+		Command tabsterCommand = new Command();
+		tabsterCommand.command = "tabster * * -";
 
-		admin.commands.add(velocityCommand);
-		admin.tabComplete.add(velocityCommand);
+		admin.commands.add(tabsterCommand);
+		admin.tabComplete.add(tabsterCommand);
 
 		admin.requirements.enabled = true;
 		admin.requirements.permission = "tabster.admin";

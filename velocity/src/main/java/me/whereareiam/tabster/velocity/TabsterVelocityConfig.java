@@ -31,6 +31,8 @@ public class TabsterVelocityConfig extends AbstractTabsterConfig {
 		bind(EventManager.class).toInstance(proxyServer.getEventManager());
 		bind(Path.class).annotatedWith(Names.named("dataPath")).toInstance(dataPath);
 
+		super.configure();
+
 		// Platform
 		bind(PlatformPlayerManager.class).to(VelocityPlayerManager.class);
 		bind(PlatformEventManager.class).to(VelocityEventManager.class);
@@ -39,7 +41,5 @@ public class TabsterVelocityConfig extends AbstractTabsterConfig {
 		bind(co.aikar.commands.VelocityCommandManager.class).toInstance(new co.aikar.commands.VelocityCommandManager(proxyServer, instance));
 		bind(CommandHelper.class).to(VelocityCommandHelper.class);
 		bind(AbstractCommandManager.class).to(VelocityCommandManager.class);
-
-		super.configure();
 	}
 }

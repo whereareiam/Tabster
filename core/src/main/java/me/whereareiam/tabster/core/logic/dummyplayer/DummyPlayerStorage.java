@@ -13,6 +13,10 @@ public class DummyPlayerStorage {
 		return dummyPlayers.stream().filter(dummyPlayer -> dummyPlayer.getUsername().equals(username)).findFirst().orElse(null);
 	}
 
+	public boolean hasPlayerWithUsername(String username) {
+		return dummyPlayers.stream().anyMatch(dummyPlayer -> dummyPlayer.getUsername().equals(username));
+	}
+
 	public boolean hasDummyPlayer(DummyPlayer dummyPlayer) {
 		return dummyPlayers.contains(dummyPlayer);
 	}

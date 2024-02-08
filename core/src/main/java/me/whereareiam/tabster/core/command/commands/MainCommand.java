@@ -8,6 +8,7 @@ import co.aikar.commands.annotation.CommandPermission;
 import co.aikar.commands.annotation.Description;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import me.whereareiam.tabster.core.cache.Cacheable;
 import me.whereareiam.tabster.core.command.base.AbstractCommandBase;
 import me.whereareiam.tabster.core.command.management.AbstractCommandManager;
 import me.whereareiam.tabster.core.config.command.CommandsConfig;
@@ -42,14 +43,11 @@ public class MainCommand extends AbstractCommandBase {
 	@CommandPermission("%permission.main")
 	@Description("%description.main")
 	public void onCommand(CommandIssuer issuer) {
-		if (issuer.isPlayer()) {
-			Component message = formatterUtil.formatMessage(buildHelpCommand(issuer));
-			platformPlayerManager.sendMessage(issuer, message);
-		} else {
-			issuer.sendMessage(formatterUtil.cleanMessage(buildHelpCommand(issuer)));
-		}
+		Component message = formatterUtil.formatMessage(buildHelpCommand(issuer));
+		platformPlayerManager.sendMessage(issuer, message);
 	}
 
+	@Cacheable(duration = 1)
 	private String buildHelpCommand(CommandIssuer issuer) {
 		Map<RootCommand, Set<RegisteredCommand>> commands = getAllowedCommands(commandManager.getAllCommands(), issuer);
 		StringBuilder formattedCommands = getFormattedCommands(commands);

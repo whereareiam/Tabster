@@ -6,6 +6,7 @@ import net.elytrium.serializer.language.object.YamlSerializable;
 @Singleton
 public class SettingsConfig extends YamlSerializable {
 	public int logLevel = 0;
+	public PerfomanceSettingsConfig perfomance = new PerfomanceSettingsConfig();
 	public boolean allowCommandFiltering = true;
 	public boolean allowTabCompleteFiltering = true;
 }
