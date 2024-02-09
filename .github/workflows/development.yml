@@ -6,11 +6,22 @@ on:
       - dev
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    outputs:
+      projectName: ${{ steps.project_details.outputs.project_name }}
+      projectVersion: ${{ steps.project_details.outputs.project_version }}
+
+    steps:
+      - name: Extract project details
+        id: project_details
+        run: |
+          echo "PROJECT_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
+          echo "PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
+
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
 
     steps:
       - uses: actions/checkout@v3
@@ -27,24 +38,21 @@ jobs:
           mvn -B -P dev package --file pom.xml
 
   moveArtifacts:
-    needs: build
+    needs: [ setup, build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
 
     steps:
-      - name: Extract project details
-        id: project_details
-        run: |
-          echo "PROJECT_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
-          echo "PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
-
       - name: Move Artifacts to Common Directory
+        env:
+          projectName: ${{ needs.setup.outputs.PROJECT_NAME }}
+          projectVersion: ${{ needs.setup.outputs.PROJECT_VERSION }}
         run: |
-          mv velocity/target/${{ needs.setup.outputs.PROJECT_NAME }}-VELOCITY-${{ needs.setup.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
-          mv spigot/target/${{ needs.setup.outputs.PROJECT_NAME }}-SPIGOT-${{ needs.setup.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
-          mv paper/target/${{ needs.setup.outputs.PROJECT_NAME }}-PAPER-${{ needs.setup.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
+          mv velocity/target/${projectName}-VELOCITY-${projectVersion}.jar ${{ github.workspace }}/
+          mv spigot/target/${projectName}-SPIGOT-${projectVersion}.jar ${{ github.workspace }}/
+          mv paper/target/${projectName}-PAPER-${projectVersion}.jar ${{ github.workspace }}/
 
   uploadArtifacts:
     needs: moveArtifacts
