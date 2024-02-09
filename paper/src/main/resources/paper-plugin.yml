@@ -1,0 +1,14 @@
+name: ${project.parent.artifactId}
+version: '${project.parent.version}'
+main: me.whereareiam.tabster.paper.TabsterPaper
+loader: me.whereareiam.tabster.paper.TabsterPaperLoader
+api-version: '1.19'
+folia-supported: true
+authors:
+  - whereareiam
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: false
+      join-classpath: true

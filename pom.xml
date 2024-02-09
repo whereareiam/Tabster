@@ -15,6 +15,7 @@
 
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <minecraft.version>1.20.4</minecraft.version>
 
         <!-- Maven version -->
         <maven.compiler.version>3.12.1</maven.compiler.version>
@@ -38,7 +39,6 @@
         <velocity.version>3.3.0</velocity.version>
 
         <!-- spigot -->
-        <minecraft.version>1.20.4</minecraft.version>
         <adventure-platform-bukkit.version>4.3.2</adventure-platform-bukkit.version>
     </properties>
 
@@ -58,11 +58,19 @@
             </modules>
         </profile>
         <profile>
+            <id>paper-dev</id>
+            <modules>
+                <module>core</module>
+                <module>paper</module>
+            </modules>
+        </profile>
+        <profile>
             <id>dev</id>
             <modules>
                 <module>core</module>
                 <module>velocity</module>
                 <module>spigot</module>
+                <module>paper</module>
             </modules>
         </profile>
         <profile>
@@ -71,6 +79,7 @@
                 <module>core</module>
                 <module>velocity</module>
                 <module>spigot</module>
+                <module>paper</module>
             </modules>
         </profile>
     </profiles>
