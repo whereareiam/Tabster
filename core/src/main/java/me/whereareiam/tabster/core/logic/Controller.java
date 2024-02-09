@@ -50,14 +50,16 @@ public class Controller {
 		} else {
 			files.forEach(file -> {
 				GroupConfig groupConfig = injector.getInstance(GroupConfig.class);
-				groupConfig.reload(file.toPath());
-				List<Group> groups = groupConfig.groups.stream()
-						.filter(group -> group.requirements.enabled)
-						.filter(group -> group.type == FilterType.BLACKLIST || group.type == FilterType.WHITELIST)
-						.toList();
+				if (groupConfig.enabled) {
+					groupConfig.reload(file.toPath());
+					List<Group> groups = groupConfig.groups.stream()
+							.filter(group -> group.requirements.enabled)
+							.filter(group -> group.type == FilterType.BLACKLIST || group.type == FilterType.WHITELIST)
+							.toList();
 
-				if (!groups.isEmpty()) {
-					this.groups.addAll(groups);
+					if (!groups.isEmpty()) {
+						this.groups.addAll(groups);
+					}
 				}
 			});
 		}

@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Singleton
+@SuppressWarnings("UnstableApiUsage")
 public class PlayerAvailableCommandsListener implements TabCompleteListener {
 	private final DummyPlayerStorage dummyPlayerStorage;
 	private final TabCompleteHandler tabCompleteHandler;
