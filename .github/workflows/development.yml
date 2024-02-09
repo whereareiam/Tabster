@@ -34,9 +34,17 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
-      - name: Build with Maven
+      - name: Build Velocity
         run: |
-          mvn -B -P dev package --file pom.xml
+          mvn -B -P velocity-dev package --file pom.xml
+
+      - name: Build Spigot
+        run: |
+          mvn -B -P spigot-dev package --file pom.xml
+
+      - name: Build Paper
+        run: |
+          mvn -B -P paper-dev package --file pom.xml
 
   moveArtifacts:
     needs: [ setup, build ]
@@ -51,9 +59,9 @@ jobs:
           projectName: ${{ needs.setup.outputs.PROJECT_NAME }}
           projectVersion: ${{ needs.setup.outputs.PROJECT_VERSION }}
         run: |
-          mv velocity/target/${projectName}-VELOCITY-${projectVersion}.jar ${{ github.workspace }}/
-          mv spigot/target/${projectName}-SPIGOT-${projectVersion}.jar ${{ github.workspace }}/
-          mv paper/target/${projectName}-PAPER-${projectVersion}.jar ${{ github.workspace }}/
+          mv velocity/target/$projectName-VELOCITY-$projectVersion.jar ${{ github.workspace }}/
+          mv spigot/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
+          mv paper/target/$projectName-PAPER-$projectVersion.jar ${{ github.workspace }}/
 
   uploadArtifacts:
     needs: moveArtifacts
