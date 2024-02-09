@@ -35,6 +35,7 @@ jobs:
       - name: Move Artifacts to Common Directory
         run: |
           mv velocity/target/${{ steps.project_details.outputs.PROJECT_NAME }}-VELOCITY-${{ steps.project_details.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
+          mv spigot/target/${{ steps.project_details.outputs.PROJECT_NAME }}-SPIGOT-${{ steps.project_details.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
