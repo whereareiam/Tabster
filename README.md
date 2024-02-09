@@ -6,10 +6,9 @@
 # TODO List:
 
 - [ ] Feature: API
-- [ ] Feature: PaperMC support
 - [ ] Feature: SpigotMC support
 - [ ] Feature: Waterfall support
-- [ ] Information: Plugin description
+- [x] Information: Plugin description
 - [x] Information: Plugin documentation
 - [x] Code: Formatting util
 - [x] Code: Logging
