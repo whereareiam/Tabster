@@ -10,3 +10,6 @@ softdepend: [
 libraries:
   - com.google.inject:guice:${guice.version}
   - net.elytrium:serializer:${serializer.version}
+  - net.kyori:adventure-platform-bukkit:${adventure-platform-bukkit.version}
+  - net.kyori:adventure-text-serializer-plain:${adventure.version}
+  - net.kyori:adventure-text-minimessage:${adventure.version}

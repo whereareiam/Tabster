@@ -4,8 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.whereareiam.tabster.core.config.setting.SettingsConfig;
 import me.whereareiam.tabster.core.util.LoggerUtil;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Singleton
@@ -13,9 +13,9 @@ public class SpigotLoggerUtil extends LoggerUtil {
 	private final Logger logger;
 
 	@Inject
-	public SpigotLoggerUtil(Logger logger, SettingsConfig settingsConfig) {
+	public SpigotLoggerUtil(JavaPlugin javaPlugin, SettingsConfig settingsConfig) {
 		super(settingsConfig);
-		this.logger = logger;
+		this.logger = javaPlugin.getLogger();
 	}
 
 	@Override
@@ -25,10 +25,10 @@ public class SpigotLoggerUtil extends LoggerUtil {
 				logger.info(message);
 				break;
 			case "WARNING":
-				logger.log(Level.WARNING, message);
+				logger.warning(message);
 				break;
 			case "SEVERE":
-				logger.log(Level.SEVERE, message);
+				logger.severe(message);
 				break;
 		}
 	}
