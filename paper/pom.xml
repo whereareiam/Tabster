@@ -41,6 +41,12 @@
     <profiles>
         <profile>
             <id>paper-dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>

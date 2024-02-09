@@ -59,6 +59,12 @@
     <profiles>
         <profile>
             <id>spigot-dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
