@@ -21,6 +21,20 @@ public class TabCompleteFilter {
 	}
 
 	public Set<String> filterTabComplete(DummyPlayer dummyPlayer, Set<String> commands) {
+		if (commands.size() == 1) {
+			String completion = commands.iterator().next();
+			if (completion.endsWith(" ")) {
+				for (Group group : dummyPlayer.getGroups()) {
+					for (Command command : group.tabComplete) {
+						FilterType filterType = command.type == FilterType.INHERIT ? group.type : command.type;
+						if (filterType == FilterType.WHITELIST) {
+							return commands;
+						}
+					}
+				}
+			}
+		}
+
 		Set<String> whitelist = new HashSet<>();
 		Set<String> blacklist = new HashSet<>();
 

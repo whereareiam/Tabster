@@ -13,7 +13,10 @@ import me.whereareiam.tabster.paper.listener.listeners.player.PlayerCommandPrepr
 import me.whereareiam.tabster.paper.listener.listeners.player.PlayerCommandSendListener;
 import me.whereareiam.tabster.paper.listener.listeners.player.PlayerJoinListener;
 import me.whereareiam.tabster.paper.listener.listeners.player.PlayerQuitListener;
+import me.whereareiam.tabster.paper.listener.listeners.tabcomplete.AsyncTabCompleteListener;
 import me.whereareiam.tabster.paper.platform.PaperEventManager;
+
+import java.util.List;
 
 @Singleton
 public class PaperListenerRegistrar extends AbstractListenerRegistrar {
@@ -41,8 +44,8 @@ public class PaperListenerRegistrar extends AbstractListenerRegistrar {
 	}
 
 	@Override
-	protected TabCompleteListener getTabCompleteListener() {
-		return injector.getInstance(PlayerCommandSendListener.class);
+	protected List<TabCompleteListener> getTabCompleteListeners() {
+		return List.of(injector.getInstance(PlayerCommandSendListener.class), injector.getInstance(AsyncTabCompleteListener.class));
 	}
 
 	@Override

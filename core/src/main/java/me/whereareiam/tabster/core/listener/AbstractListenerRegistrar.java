@@ -11,6 +11,8 @@ import me.whereareiam.tabster.core.listener.state.CommandListenerState;
 import me.whereareiam.tabster.core.listener.state.TabCompleteListenerState;
 import me.whereareiam.tabster.core.platform.PlatformEventManager;
 
+import java.util.List;
+
 @Singleton
 public abstract class AbstractListenerRegistrar {
 	private final PlatformEventManager platformEventManager;
@@ -26,7 +28,7 @@ public abstract class AbstractListenerRegistrar {
 
 	protected abstract ServerSwitchListener getServerSwitchListener();
 
-	protected abstract TabCompleteListener getTabCompleteListener();
+	protected abstract List<TabCompleteListener> getTabCompleteListeners();
 
 	protected abstract CommandListener getCommandListener();
 
@@ -37,8 +39,10 @@ public abstract class AbstractListenerRegistrar {
 		if (getServerSwitchListener() != null)
 			platformEventManager.registerEvent(getServerSwitchListener());
 
-		if (TabCompleteListenerState.isRequired())
-			platformEventManager.registerEvent(getTabCompleteListener());
+		if (TabCompleteListenerState.isRequired()) {
+			for (TabCompleteListener tabCompleteListener : getTabCompleteListeners())
+				platformEventManager.registerEvent(tabCompleteListener);
+		}
 
 		if (CommandListenerState.isRequired())
 			platformEventManager.registerEvent(getCommandListener());

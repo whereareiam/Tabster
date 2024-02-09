@@ -15,6 +15,8 @@ import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerJoinListene
 import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerQuitListener;
 import me.whereareiam.tabster.spigot.platform.SpigotEventManager;
 
+import java.util.List;
+
 @Singleton
 public class SpigotListenerRegistrar extends AbstractListenerRegistrar {
 	private final Injector injector;
@@ -41,8 +43,8 @@ public class SpigotListenerRegistrar extends AbstractListenerRegistrar {
 	}
 
 	@Override
-	protected TabCompleteListener getTabCompleteListener() {
-		return injector.getInstance(PlayerCommandSendListener.class);
+	protected List<TabCompleteListener> getTabCompleteListeners() {
+		return List.of(injector.getInstance(PlayerCommandSendListener.class), injector.getInstance(me.whereareiam.tabster.spigot.listener.listeners.tabcomplete.TabCompleteListener.class));
 	}
 
 	@Override
