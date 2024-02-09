@@ -44,7 +44,7 @@ jobs:
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         uses: actions/upload-artifact@v4
         with:
-          name: Velocity
+          name: Velocity-b${{ github.run_number }}
           path: velocity/target/${{ env.projectName }}-VELOCITY-${{ env.projectVersion }}.jar
 
   spigot:
@@ -70,7 +70,7 @@ jobs:
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         uses: actions/upload-artifact@v4
         with:
-          name: Spigot
+          name: Spigot-b${{ github.run_number }}
           path: spigot/target/${{ env.projectName }}-SPIGOT-${{ env.projectVersion }}.jar
 
   paper:
@@ -96,5 +96,5 @@ jobs:
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         uses: actions/upload-artifact@v4
         with:
-          name: Paper
+          name: Paper-b${{ github.run_number }}
           path: paper/target/${{ env.projectName }}-PAPER-${{ env.projectVersion }}.jar
