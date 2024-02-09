@@ -67,7 +67,7 @@ jobs:
           projectName: ${{ needs.setup.outputs.projectName }}
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         run: |
-          mv velocity/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
+          mv spigot/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
 
   paper:
     needs: setup
