@@ -49,7 +49,7 @@ jobs:
           mv paper/target/${{ needs.setup.outputs.PROJECT_NAME }}-PAPER-${{ needs.setup.outputs.PROJECT_VERSION }}.jar ${{ github.workspace }}/
 
   uploadArtifacts:
-    needs: move_artifacts
+    needs: moveArtifacts
     runs-on: ubuntu-latest
 
     steps:
