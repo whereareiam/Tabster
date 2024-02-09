@@ -38,12 +38,14 @@ jobs:
       - name: Build Velocity
         run: |
           mvn -pl core,velocity -B -P dev package --file pom.xml
-      - name: Move artifact
+      - name: Upload artifact
         env:
           projectName: ${{ needs.setup.outputs.projectName }}
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
-        run: |
-          mv velocity/target/$projectName-VELOCITY-$projectVersion.jar ${{ github.workspace }}/
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-artifact
+          path: paper/target/$projectName-VELOCITY-$projectVersion.jar
 
   spigot:
     needs: setup
@@ -51,10 +53,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 17
+      - name: Set up JDK 11
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '11'
           distribution: 'temurin'
           server-id: github
           settings-path: ${{ github.workspace }}
@@ -68,6 +70,14 @@ jobs:
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         run: |
           mv spigot/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
+      - name: Upload artifact
+        env:
+          projectName: ${{ needs.setup.outputs.projectName }}
+          projectVersion: ${{ needs.setup.outputs.projectVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-artifact
+          path: paper/target/$projectName-SPIGOT-$projectVersion.jar
 
   paper:
     needs: setup
@@ -83,23 +93,14 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
-      - name: Build Spigot
+      - name: Build Paper
         run: |
           mvn -pl core,paper -B -P dev package --file pom.xml
-      - name: Move artifact
+      - name: Upload artifact
         env:
           projectName: ${{ needs.setup.outputs.projectName }}
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
-        run: |
-          mv paper/target/$projectName-PAPER-$projectVersion.jar ${{ github.workspace }}/
-
-  upload:
-    needs: [ velocity, spigot, paper ]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Tabster-b${{ github.run_number }}
-          path: ${{ github.workspace }}/*.jar
+          name: paper-artifact
+          path: paper/target/$projectName-PAPER-$projectVersion.jar
