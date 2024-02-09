@@ -8,6 +8,7 @@ import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayerStorage;
 import me.whereareiam.tabster.core.model.DummyCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
@@ -22,12 +23,18 @@ public class PlayerCommandPreprocessListener implements Listener, CommandListene
 		this.commandHandler = commandHandler;
 	}
 
+	@EventHandler
 	public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
 		Player player = event.getPlayer();
 		DummyPlayer dummyPlayer = dummyPlayerStorage.getDummyPlayer(player.getName());
 
+		String command = event.getMessage();
+		if (command.startsWith("/")) {
+			command = command.substring(1);
+		}
+
 		DummyCommand dummyCommand = new DummyCommand(
-				event.getMessage(),
+				command,
 				event.isCancelled()
 		);
 

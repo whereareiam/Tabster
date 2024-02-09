@@ -10,6 +10,7 @@ import me.whereareiam.tabster.core.listener.listeners.connection.QuitListener;
 import me.whereareiam.tabster.core.listener.listeners.connection.ServerSwitchListener;
 import me.whereareiam.tabster.core.listener.listeners.player.TabCompleteListener;
 import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerCommandPreprocessListener;
+import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerCommandSendListener;
 import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerJoinListener;
 import me.whereareiam.tabster.spigot.listener.listeners.player.PlayerQuitListener;
 import me.whereareiam.tabster.spigot.platform.SpigotEventManager;
@@ -41,7 +42,7 @@ public class SpigotListenerRegistrar extends AbstractListenerRegistrar {
 
 	@Override
 	protected TabCompleteListener getTabCompleteListener() {
-		return injector.getInstance(me.whereareiam.tabster.spigot.listener.listeners.tabcomplete.TabCompleteListener.class);
+		return injector.getInstance(PlayerCommandSendListener.class);
 	}
 
 	@Override

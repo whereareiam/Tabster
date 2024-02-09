@@ -29,7 +29,7 @@ public class PlayerJoinListener implements Listener, JoinListener {
 		onJoin(dummyPlayerFactory.createDummyPlayer(
 				player.getName(),
 				player.getUniqueId(),
-				""
+				null
 		));
 	}
 
