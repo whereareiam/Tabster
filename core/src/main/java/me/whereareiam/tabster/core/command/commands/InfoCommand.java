@@ -45,6 +45,7 @@ public class InfoCommand extends AbstractCommandBase {
 	}
 
 	@Subcommand("%tabcomplete.info")
+	@CommandCompletion("@players")
 	@CommandPermission("%permission.info")
 	@Description("%description.info")
 	@Syntax("%syntax.info")
@@ -57,7 +58,7 @@ public class InfoCommand extends AbstractCommandBase {
 							.replace("{playerName}", dummyPlayer.getUsername())
 							.replace("{username}", dummyPlayer.getUsername())
 							.replace("{uuid}", dummyPlayer.getUniqueId().toString())
-							.replace("{serverName}", dummyPlayer.getServer())
+							.replace("{serverName}", dummyPlayer.getServer() != null ? dummyPlayer.getServer() : "N/A")
 							.replace("{allowedGroups}", allowedGroups))
 					.collect(Collectors.joining("\n"));
 			platformPlayerManager.sendMessage(issuer, formatterUtil.formatMessage(message));

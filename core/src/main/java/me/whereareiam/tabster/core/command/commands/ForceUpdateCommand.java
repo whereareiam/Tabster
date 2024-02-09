@@ -44,6 +44,7 @@ public class ForceUpdateCommand extends AbstractCommandBase {
 	}
 
 	@Subcommand("%tabcomplete.forceUpdate")
+	@CommandCompletion("@players")
 	@CommandPermission("%permission.forceUpdate")
 	@Description("%description.forceUpdate")
 	@Syntax("%syntax.forceUpdate")
