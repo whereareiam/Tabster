@@ -10,10 +10,10 @@ import net.elytrium.serializer.language.object.YamlSerializable;
 public class MessagesConfig extends YamlSerializable {
 	@Comment(
 			value = {
-					@CommentValue(" Set 'found-blocked-command: null' to disable the message"),
+					@CommentValue(" Set 'found-blocked-tabcomplete: null' to disable the message"),
 			},
 			at = Comment.At.PREPEND
 	)
-	public String foundBlockedCommand = " <gold>ᴛᴀʙsᴛᴇʀ <dark_gray>| <white>We found this command in another group which you can access using <gray>{groupRequirement} group";
+	public String foundBlockedCommand = " <gold>ᴛᴀʙsᴛᴇʀ <dark_gray>| <white>We found this tabcomplete in another group which you can access using <gray>{groupRequirement} group";
 	public CommandsMessagesConfig commands = new CommandsMessagesConfig();
 }

@@ -42,7 +42,7 @@ public class InfoPrinterUtil {
 		}
 
 		int commandCount = commandManager.getCommandCount();
-		loggerUtil.info("  Registered " + commandCount + " " + (commandCount == 1 ? "command" : "commands"));
+		loggerUtil.info("  Registered " + commandCount + " " + (commandCount == 1 ? "tabcomplete" : "commands"));
 
 		loggerUtil.info("");
 	}

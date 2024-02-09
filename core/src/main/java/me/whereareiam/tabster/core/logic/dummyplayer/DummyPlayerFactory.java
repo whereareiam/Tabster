@@ -35,9 +35,6 @@ public class DummyPlayerFactory {
 	}
 
 	private Set<Group> selectGroups(String username, String server, Set<String> processedGroups) {
-		if (server.isEmpty())
-			return new HashSet<>();
-
 		List<Group> sortedGroups = controller.getGroups().stream()
 				.sorted(Comparator.comparing(Group::getPriority).reversed())
 				.toList();
@@ -55,7 +52,7 @@ public class DummyPlayerFactory {
 					continue;
 				}
 			}
-			if (!isServerAllowed(server, group.requirements.allowedServers)) {
+			if (server != null && !isServerAllowed(server, group.requirements.allowedServers)) {
 				continue;
 			}
 

@@ -33,7 +33,9 @@ public abstract class AbstractListenerRegistrar {
 	public void registerListeners() {
 		platformEventManager.registerEvent(getJoinListener());
 		platformEventManager.registerEvent(getQuitListener());
-		platformEventManager.registerEvent(getServerSwitchListener());
+
+		if (getServerSwitchListener() != null)
+			platformEventManager.registerEvent(getServerSwitchListener());
 
 		if (TabCompleteListenerState.isRequired())
 			platformEventManager.registerEvent(getTabCompleteListener());

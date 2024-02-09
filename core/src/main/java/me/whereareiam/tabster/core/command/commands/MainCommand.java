@@ -39,7 +39,7 @@ public class MainCommand extends AbstractCommandBase {
 		this.messages = messages;
 	}
 
-	@CommandAlias("%command.main")
+	@CommandAlias("%tabcomplete.main")
 	@CommandPermission("%permission.main")
 	@Description("%description.main")
 	public void onCommand(CommandIssuer issuer) {
@@ -75,14 +75,14 @@ public class MainCommand extends AbstractCommandBase {
 
 			if (registeredCommands.isEmpty()) {
 				String commandFormat = messages.commands.mainCommand.commandFormat
-						.replace("{command}", rootCommand.getCommandName())
+						.replace("{tabcomplete}", rootCommand.getCommandName())
 						.replace("{subCommand}", "")
 						.replace("{description}", rootCommand.getDescription());
 				formattedCommands.append(commandFormat).append("\n");
 			} else {
 				for (RegisteredCommand registeredCommand : registeredCommands) {
 					String commandFormat = messages.commands.mainCommand.commandFormat
-							.replace("{command}", rootCommand.getCommandName())
+							.replace("{tabcomplete}", rootCommand.getCommandName())
 							.replace("{subCommand}", " " + registeredCommand.getPrefSubCommand())
 							.replace("{description}", registeredCommand.getHelpText());
 					formattedCommands.append(commandFormat).append("\n");
@@ -131,7 +131,7 @@ public class MainCommand extends AbstractCommandBase {
 
 	@Override
 	public void addReplacements() {
-		commandHelper.addReplacement(commands.mainCommand.command, "command.main");
+		commandHelper.addReplacement(commands.mainCommand.command, "tabcomplete.main");
 		commandHelper.addReplacement(commands.mainCommand.permission, "permission.main");
 		commandHelper.addReplacement(messages.commands.mainCommand.description, "description.main");
 	}
