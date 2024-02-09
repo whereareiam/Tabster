@@ -23,4 +23,4 @@
 # Statistics
 
 ![bStats](https://bstats.org/signatures/velocity/tabster.svg)
-![build](https://img.shields.io/github/actions/workflow/status/whereareiam/Tabster/development.yml) ![SpigotMC downloads](https://pluginbadges.glitch.me/api/v1/dl/downloads-limegreen.svg?spigot=113119&github=whereareiam%2FTabster&style=flat) ![GitHub release](https://img.shields.io/github/v/release/whereareiam/Tabster)
+![build](https://img.shields.io/github/actions/workflow/status/whereareiam/Tabster/development.yml) ![SpigotMC downloads](https://pluginbadges.glitch.me/api/v1/dl/downloads-limegreen.svg?spigot=114999&github=whereareiam%2FTabster&style=flat) ![GitHub release](https://img.shields.io/github/v/release/whereareiam/Tabster)
