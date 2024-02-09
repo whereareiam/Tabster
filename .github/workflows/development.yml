@@ -21,7 +21,8 @@ jobs:
           echo "PROJECT_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
           echo "PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
-  Velocity:
+  velocity:
+    needs: setup
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +45,8 @@ jobs:
         run: |
           mv velocity/target/$projectName-VELOCITY-$projectVersion.jar ${{ github.workspace }}/
 
-  Spigot:
+  spigot:
+    needs: setup
     runs-on: ubuntu-latest
 
     steps:
@@ -67,7 +69,8 @@ jobs:
         run: |
           mv velocity/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
 
-  Paper:
+  paper:
+    needs: setup
     runs-on: ubuntu-latest
 
     steps:
@@ -90,8 +93,8 @@ jobs:
         run: |
           mv paper/target/$projectName-PAPER-$projectVersion.jar ${{ github.workspace }}/
 
-  uploadArtifacts:
-    needs: [ Velocity, Spigot, Paper ]
+  upload:
+    needs: [ velocity, spigot, paper ]
     runs-on: ubuntu-latest
 
     steps:
