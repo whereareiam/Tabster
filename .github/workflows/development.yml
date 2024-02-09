@@ -21,13 +21,13 @@ jobs:
           echo "PROJECT_NAME=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
           echo "PROJECT_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
 
-  build:
+  Velocity:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -37,35 +37,61 @@ jobs:
       - name: Build Velocity
         run: |
           mvn -pl core,velocity -B -P dev package --file pom.xml
-
-      - name: Build Spigot
-        run: |
-          mvn -pl core,spigot -B -P dev package --file pom.xml
-
-      - name: Build Paper
-        run: |
-          mvn -pl core,paper -B -P dev package --file pom.xml
-
-  moveArtifacts:
-    needs: [ setup, build ]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-
-    steps:
-      - name: Move Artifacts to Common Directory
+      - name: Move artifact
         env:
           projectName: ${{ needs.setup.outputs.projectName }}
           projectVersion: ${{ needs.setup.outputs.projectVersion }}
         run: |
           mv velocity/target/$projectName-VELOCITY-$projectVersion.jar ${{ github.workspace }}/
-          mv spigot/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
+
+  Spigot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build Spigot
+        run: |
+          mvn -pl core,spigot -B -P dev package --file pom.xml
+      - name: Move artifact
+        env:
+          projectName: ${{ needs.setup.outputs.projectName }}
+          projectVersion: ${{ needs.setup.outputs.projectVersion }}
+        run: |
+          mv velocity/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
+
+  Paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build Spigot
+        run: |
+          mvn -pl core,paper -B -P dev package --file pom.xml
+      - name: Move artifact
+        env:
+          projectName: ${{ needs.setup.outputs.projectName }}
+          projectVersion: ${{ needs.setup.outputs.projectVersion }}
+        run: |
           mv paper/target/$projectName-PAPER-$projectVersion.jar ${{ github.workspace }}/
 
-
   uploadArtifacts:
-    needs: moveArtifacts
+    needs: [ Velocity, Spigot, Paper ]
     runs-on: ubuntu-latest
 
     steps:
