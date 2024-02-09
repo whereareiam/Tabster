@@ -40,7 +40,7 @@ public class Updater {
 			loggerUtil.info("You are on a dev build.");
 		} else if (!currentVersion.equals(latestVersion)) {
 			loggerUtil.severe("Update found! The latest version is " + latestVersion);
-			loggerUtil.severe("Download here: https://www.spigotmc.org/resources/113119/updates");
+			loggerUtil.severe("Download here: https://www.spigotmc.org/resources/114999/updates");
 		}
 	}
 
@@ -70,7 +70,7 @@ public class Updater {
 		HttpURLConnection conn = null;
 
 		try {
-			String updateUrl = "https://api.spigotmc.org/legacy/update.php?resource=113119";
+			String updateUrl = "https://api.spigotmc.org/legacy/update.php?resource=114999";
 			final URL url = new URL(updateUrl);
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
