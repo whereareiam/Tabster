@@ -36,15 +36,15 @@ jobs:
 
       - name: Build Velocity
         run: |
-          mvn -B -P velocity-dev package --file pom.xml
+          mvn -pl core,velocity -B -P dev package --file pom.xml
 
       - name: Build Spigot
         run: |
-          mvn -B -P spigot-dev package --file pom.xml
+          mvn -pl core,spigot -B -P dev package --file pom.xml
 
       - name: Build Paper
         run: |
-          mvn -B -P paper-dev package --file pom.xml
+          mvn -pl core,paper -B -P dev package --file pom.xml
 
   moveArtifacts:
     needs: [ setup, build ]
