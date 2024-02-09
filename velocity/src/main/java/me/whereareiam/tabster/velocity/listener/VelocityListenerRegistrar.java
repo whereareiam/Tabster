@@ -16,6 +16,8 @@ import me.whereareiam.tabster.velocity.listener.listeners.connection.ServerPreCo
 import me.whereareiam.tabster.velocity.listener.listeners.player.PlayerAvailableCommandsListener;
 import me.whereareiam.tabster.velocity.platform.VelocityEventManager;
 
+import java.util.List;
+
 @Singleton
 public class VelocityListenerRegistrar extends AbstractListenerRegistrar {
 	private final Injector injector;
@@ -42,8 +44,8 @@ public class VelocityListenerRegistrar extends AbstractListenerRegistrar {
 	}
 
 	@Override
-	protected TabCompleteListener getTabCompleteListener() {
-		return injector.getInstance(PlayerAvailableCommandsListener.class);
+	protected List<TabCompleteListener> getTabCompleteListeners() {
+		return List.of(injector.getInstance(PlayerAvailableCommandsListener.class));
 	}
 
 	@Override
