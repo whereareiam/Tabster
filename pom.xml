@@ -6,12 +6,12 @@
 
     <groupId>me.whereareiam</groupId>
     <artifactId>Tabster</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <properties>
         <!-- Project config -->
-        <testDir>/Users/whereareiam/Projects/TestP/local/templates/Proxy/default/plugins</testDir>
+        <testDir>/Users/whereareiam/Projects/TestP/local/templates/Lobby/default/plugins</testDir>
 
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,12 +30,16 @@
         <bstats.version>3.0.2</bstats.version>
 
         <!-- core -->
-        <acf-paper.version>0.5.1</acf-paper.version>
+        <acf.version>0.5.1</acf.version>
         <adventure.version>4.15.0</adventure.version>
         <luckperms.version>5.4</luckperms.version>
 
         <!-- velocity -->
         <velocity.version>3.3.0</velocity.version>
+
+        <!-- spigot -->
+        <minecraft.version>1.20.4</minecraft.version>
+        <adventure-platform-bukkit.version>4.3.2</adventure-platform-bukkit.version>
     </properties>
 
     <profiles>
@@ -47,10 +51,18 @@
             </modules>
         </profile>
         <profile>
+            <id>spigot-dev</id>
+            <modules>
+                <module>core</module>
+                <module>spigot</module>
+            </modules>
+        </profile>
+        <profile>
             <id>dev</id>
             <modules>
                 <module>core</module>
                 <module>velocity</module>
+                <module>spigot</module>
             </modules>
         </profile>
         <profile>
@@ -58,6 +70,7 @@
             <modules>
                 <module>core</module>
                 <module>velocity</module>
+                <module>spigot</module>
             </modules>
         </profile>
     </profiles>

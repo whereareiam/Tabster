@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Singleton
-@CommandAlias("%command.main")
+@CommandAlias("%tabcomplete.main")
 public class InfoCommand extends AbstractCommandBase {
 	private final MessagesConfig messages;
 	private final CommandsConfig commands;
@@ -36,7 +36,7 @@ public class InfoCommand extends AbstractCommandBase {
 		this.formatterUtil = formatterUtil;
 	}
 
-	@Subcommand("%command.info")
+	@Subcommand("%tabcomplete.info")
 	@CommandPermission("%permission.info")
 	@Description("%description.info")
 	public void onCommand(CommandIssuer issuer) {
@@ -44,7 +44,7 @@ public class InfoCommand extends AbstractCommandBase {
 				formatterUtil.formatMessage(messages.commands.wrongSyntax));
 	}
 
-	@Subcommand("%command.info")
+	@Subcommand("%tabcomplete.info")
 	@CommandPermission("%permission.info")
 	@Description("%description.info")
 	@Syntax("%syntax.info")
@@ -82,7 +82,7 @@ public class InfoCommand extends AbstractCommandBase {
 
 	@Override
 	public void addReplacements() {
-		commandHelper.addReplacement(commands.infoCommand.subCommand, "command.info");
+		commandHelper.addReplacement(commands.infoCommand.subCommand, "tabcomplete.info");
 		commandHelper.addReplacement(commands.infoCommand.permission, "permission.info");
 		commandHelper.addReplacement(commands.infoCommand.syntax, "syntax.info");
 		commandHelper.addReplacement(messages.commands.infoCommand.description, "description.info");

@@ -1,0 +1,12 @@
+name: ${project.parent.artifactId}
+version: '${project.parent.version}'
+main: me.whereareiam.tabster.spigot.TabsterSpigot
+api-version: '1.16'
+author: whereareiam
+softdepend: [
+  LuckPerms
+]
+
+libraries:
+  - com.google.inject:guice:${guice.version}
+  - net.elytrium:serializer:${serializer.version}

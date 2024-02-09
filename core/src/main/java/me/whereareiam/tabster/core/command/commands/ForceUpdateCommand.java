@@ -14,7 +14,7 @@ import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
 import me.whereareiam.tabster.core.util.FormatterUtil;
 
 @Singleton
-@CommandAlias("%command.main")
+@CommandAlias("%tabcomplete.main")
 public class ForceUpdateCommand extends AbstractCommandBase {
 	private final MessagesConfig messages;
 	private final CommandsConfig commands;
@@ -35,7 +35,7 @@ public class ForceUpdateCommand extends AbstractCommandBase {
 		this.formatterUtil = formatterUtil;
 	}
 
-	@Subcommand("%command.forceUpdate")
+	@Subcommand("%tabcomplete.forceUpdate")
 	@CommandPermission("%permission.forceUpdate")
 	@Description("%description.forceUpdate")
 	public void onCommand(CommandIssuer issuer) {
@@ -43,7 +43,7 @@ public class ForceUpdateCommand extends AbstractCommandBase {
 				formatterUtil.formatMessage(messages.commands.wrongSyntax));
 	}
 
-	@Subcommand("%command.forceUpdate")
+	@Subcommand("%tabcomplete.forceUpdate")
 	@CommandPermission("%permission.forceUpdate")
 	@Description("%description.forceUpdate")
 	@Syntax("%syntax.forceUpdate")
@@ -70,7 +70,7 @@ public class ForceUpdateCommand extends AbstractCommandBase {
 
 	@Override
 	public void addReplacements() {
-		commandHelper.addReplacement(commands.forceUpdateCommand.subCommand, "command.forceUpdate");
+		commandHelper.addReplacement(commands.forceUpdateCommand.subCommand, "tabcomplete.forceUpdate");
 		commandHelper.addReplacement(commands.forceUpdateCommand.permission, "permission.forceUpdate");
 		commandHelper.addReplacement(commands.forceUpdateCommand.syntax, "syntax.forceUpdate");
 		commandHelper.addReplacement(messages.commands.forceUpdateCommand.description, "description.forceUpdate");

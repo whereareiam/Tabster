@@ -29,7 +29,7 @@ public class SettingsConfig extends YamlSerializable {
 
 	@Comment(
 			value = {
-					@CommentValue(" This option allows you to disable or enable the use of the command filtering"),
+					@CommentValue(" This option allows you to disable or enable the use of the tabcomplete filtering"),
 					@CommentValue(" system, which allows you to filter commands."),
 			},
 			at = Comment.At.PREPEND

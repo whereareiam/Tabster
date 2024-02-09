@@ -18,7 +18,7 @@ public abstract class AbstractTabster {
 	public static String version;
 	protected Injector injector;
 
-	protected void onProxyInitialization() {
+	public void onEnable() {
 		Properties prop = new Properties();
 		try (InputStream input = getClass().getClassLoader().getResourceAsStream("version.properties")) {
 			prop.load(input);
@@ -44,7 +44,11 @@ public abstract class AbstractTabster {
 		injector.getInstance(InfoPrinterUtil.class).printStartMessage();
 	}
 
-	protected void onProxyShutdown() {
+	public void onDisable() {
 		injector.getInstance(Scheduler.class).shutdown();
+	}
+
+	public void setInjector(Injector injector) {
+		this.injector = injector;
 	}
 }

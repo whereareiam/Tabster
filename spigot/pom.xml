@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>velocity</artifactId>
+    <artifactId>spigot</artifactId>
 
     <parent>
         <groupId>me.whereareiam</groupId>
@@ -19,28 +19,46 @@
         </dependency>
         <dependency>
             <groupId>co.aikar</groupId>
-            <artifactId>acf-velocity</artifactId>
+            <artifactId>acf-bukkit</artifactId>
             <version>${acf.version}-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.bstats</groupId>
-            <artifactId>bstats-velocity</artifactId>
+            <artifactId>bstats-bukkit</artifactId>
             <version>${bstats.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.velocitypowered</groupId>
-            <artifactId>velocity-api</artifactId>
-            <version>${velocity.version}-SNAPSHOT</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>${minecraft.version}-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-platform-bukkit</artifactId>
+            <version>${adventure-platform-bukkit.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-plain</artifactId>
+            <version>${adventure.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>${adventure.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
-    <!-- velocity test profile -->
+    <!-- spigot test profile -->
     <profiles>
         <profile>
-            <id>velocity-dev</id>
+            <id>spigot-dev</id>
             <build>
                 <plugins>
                     <plugin>
@@ -52,9 +70,9 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <copy file="${project.build.directory}/${project.parent.artifactId}-VELOCITY-${project.parent.version}.jar"
+                                        <copy file="${project.build.directory}/${project.parent.artifactId}-SPIGOT-${project.parent.version}.jar"
                                               todir="${testDir}"/>
-                                        <move file="${testDir}/${project.parent.artifactId}-VELOCITY-${project.parent.version}.jar"
+                                        <move file="${testDir}/${project.parent.artifactId}-SPIGOT-${project.parent.version}.jar"
                                               tofile="${testDir}/${project.parent.artifactId}.jar"/>
                                     </target>
                                 </configuration>
@@ -97,7 +115,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>me.whereareiam.tabster.velocity.integration.bstats</shadedPattern>
+                            <shadedPattern>me.whereareiam.tabster.spigot.integration.bstats</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -126,6 +144,6 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>${project.parent.artifactId}-VELOCITY-${project.parent.version}</finalName>
+        <finalName>${project.parent.artifactId}-SPIGOT-${project.parent.version}</finalName>
     </build>
 </project>

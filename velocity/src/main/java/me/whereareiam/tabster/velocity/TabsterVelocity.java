@@ -17,7 +17,7 @@ import java.nio.file.Path;
 @Plugin(
 		id = "tabster",
 		name = "Tabster",
-		version = "0.0.1",
+		version = "1.0.0",
 		authors = {
 				"whereareiam"
 		}
@@ -35,15 +35,15 @@ public class TabsterVelocity extends AbstractTabster {
 	}
 
 	@Subscribe
-	public void onProxyInitialization(ProxyInitializeEvent event) {
+	public void onLoad(ProxyInitializeEvent event) {
 		injector = Guice.createInjector(new TabsterVelocityConfig(this, proxyServer, dataPath, logger));
-		super.onProxyInitialization();
+		super.onEnable();
 
 		injector.getInstance(VelocityListenerRegistrar.class).registerListeners();
 	}
 
 	@Subscribe
-	public void onProxyShutdown(ProxyShutdownEvent event) {
-		super.onProxyShutdown();
+	public void onDisable(ProxyShutdownEvent event) {
+		super.onDisable();
 	}
 }

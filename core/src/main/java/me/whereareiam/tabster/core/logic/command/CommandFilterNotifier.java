@@ -49,7 +49,7 @@ public class CommandFilterNotifier {
 
 	private void notifyBlockedCommandPlayer(DummyPlayer dummyPlayer, Group group, String command) {
 		String message = group.messages.commandBlocked
-				.replace("{command}", command)
+				.replace("{tabcomplete}", command)
 				.replace("{groupId}", group.id);
 
 		if (message.isBlank() || message.isEmpty())

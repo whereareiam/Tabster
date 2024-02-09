@@ -15,7 +15,7 @@ import me.whereareiam.tabster.core.platform.PlatformPlayerManager;
 import me.whereareiam.tabster.core.util.FormatterUtil;
 
 @Singleton
-@CommandAlias("%command.main")
+@CommandAlias("%tabcomplete.main")
 public class ReloadCommand extends AbstractCommandBase {
 	private final CommandsConfig commands;
 	private final MessagesConfig messages;
@@ -33,7 +33,7 @@ public class ReloadCommand extends AbstractCommandBase {
 		this.formatterUtil = formatterUtil;
 	}
 
-	@Subcommand("%command.reload")
+	@Subcommand("%tabcomplete.reload")
 	@CommandPermission("%permission.reload")
 	@Description("%description.reload")
 	public void onCommand(CommandIssuer issuer) {
@@ -50,7 +50,7 @@ public class ReloadCommand extends AbstractCommandBase {
 
 	@Override
 	public void addReplacements() {
-		commandHelper.addReplacement(commands.reloadCommand.subCommand, "command.reload");
+		commandHelper.addReplacement(commands.reloadCommand.subCommand, "tabcomplete.reload");
 		commandHelper.addReplacement(commands.reloadCommand.permission, "permission.reload");
 		commandHelper.addReplacement(messages.commands.reloadCommand.description, "description.reload");
 	}
