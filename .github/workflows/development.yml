@@ -64,12 +64,6 @@ jobs:
       - name: Build Spigot
         run: |
           mvn -pl core,spigot -B -P dev package --file pom.xml
-      - name: Move artifact
-        env:
-          projectName: ${{ needs.setup.outputs.projectName }}
-          projectVersion: ${{ needs.setup.outputs.projectVersion }}
-        run: |
-          mv spigot/target/$projectName-SPIGOT-$projectVersion.jar ${{ github.workspace }}/
       - name: Upload artifact
         env:
           projectName: ${{ needs.setup.outputs.projectName }}
