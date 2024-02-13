@@ -1,42 +1,39 @@
-package me.whereareiam.tabster.spigot.listener.listeners.tabcomplete;
+package me.whereareiam.tabster.waterfall.listener.listeners.connection;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import io.github.waterfallmc.waterfall.event.ProxyDefineCommandsEvent;
 import me.whereareiam.tabster.core.listener.handler.TabCompleteHandler;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayerStorage;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.TabCompleteEvent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.event.EventHandler;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Singleton
-public class TabCompleteListener implements Listener, me.whereareiam.tabster.core.listener.listeners.player.TabCompleteListener {
+public class ProxyDefineCommandsListener implements Listener, me.whereareiam.tabster.core.listener.listeners.player.TabCompleteListener {
 	private final DummyPlayerStorage dummyPlayerStorage;
 	private final TabCompleteHandler tabCompleteHandler;
 
 	@Inject
-	public TabCompleteListener(DummyPlayerStorage dummyPlayerStorage, TabCompleteHandler tabCompleteHandler) {
+	public ProxyDefineCommandsListener(DummyPlayerStorage dummyPlayerStorage, TabCompleteHandler tabCompleteHandler) {
 		this.dummyPlayerStorage = dummyPlayerStorage;
 		this.tabCompleteHandler = tabCompleteHandler;
 	}
 
 	@EventHandler
-	public void onAsyncTabCompleteEvent(TabCompleteEvent event) {
-		Player player = (Player) event.getSender();
+	public void onProxyDefineCommandsEvent(ProxyDefineCommandsEvent event) {
+		if (!(event.getReceiver() instanceof ProxiedPlayer player))
+			return;
 
 		Set<String> completions = onTabComplete(
 				dummyPlayerStorage.getDummyPlayer(player.getName()),
-				new HashSet<>(List.of(event.getBuffer().substring(1)))
+				event.getCommands().keySet()
 		);
 
-		if (completions.isEmpty()) {
-			event.setCancelled(true);
-		}
+		event.getCommands().keySet().removeIf(node -> !completions.contains(node));
 	}
 
 	@Override

@@ -30,10 +30,9 @@ public class AsyncTabCompleteListener implements Listener, TabCompleteListener {
 	public void onAsyncTabCompleteEvent(AsyncTabCompleteEvent event) {
 		Player player = (Player) event.getSender();
 
-		String command = event.getBuffer().equals("bukkit:ver ") ? "" : event.getBuffer().substring(1);
 		Set<String> completions = onTabComplete(
 				dummyPlayerStorage.getDummyPlayer(player.getName()),
-				new HashSet<>(List.of(command))
+				new HashSet<>(List.of(event.getBuffer().substring(1)))
 		);
 
 		if (completions.isEmpty()) {

@@ -6,12 +6,12 @@
 
     <groupId>me.whereareiam</groupId>
     <artifactId>Tabster</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <packaging>pom</packaging>
 
     <properties>
         <!-- Project config -->
-        <testDir>/Users/whereareiam/Projects/TestP/local/templates/Lobby/default/plugins</testDir>
+        <testDir>/Users/whereareiam/Projects/TestP/local/templates/Proxy/default/plugins</testDir>
 
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +29,7 @@
         <guice.version>7.0.0</guice.version>
         <serializer.version>1.1.1</serializer.version>
         <bstats.version>3.0.2</bstats.version>
+        <adventure-platform.version>4.3.2</adventure-platform.version>
 
         <!-- core -->
         <acf.version>0.5.1</acf.version>
@@ -38,8 +39,8 @@
         <!-- velocity -->
         <velocity.version>3.3.0</velocity.version>
 
-        <!-- spigot -->
-        <adventure-platform-bukkit.version>4.3.2</adventure-platform-bukkit.version>
+        <!-- waterfall -->
+        <waterfall.version>1.20</waterfall.version>
     </properties>
 
     <profiles>
@@ -65,12 +66,20 @@
             </modules>
         </profile>
         <profile>
+            <id>waterfall-dev</id>
+            <modules>
+                <module>core</module>
+                <module>waterfall</module>
+            </modules>
+        </profile>
+        <profile>
             <id>dev</id>
             <modules>
                 <module>core</module>
                 <module>velocity</module>
                 <module>spigot</module>
                 <module>paper</module>
+                <module>waterfall</module>
             </modules>
         </profile>
         <profile>
@@ -80,6 +89,7 @@
                 <module>velocity</module>
                 <module>spigot</module>
                 <module>paper</module>
+                <module>waterfall</module>
             </modules>
         </profile>
     </profiles>

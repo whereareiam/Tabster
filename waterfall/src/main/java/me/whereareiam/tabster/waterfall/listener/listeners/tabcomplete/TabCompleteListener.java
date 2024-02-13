@@ -1,20 +1,17 @@
-package me.whereareiam.tabster.spigot.listener.listeners.tabcomplete;
+package me.whereareiam.tabster.waterfall.listener.listeners.tabcomplete;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import me.whereareiam.tabster.core.listener.handler.TabCompleteHandler;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayer;
 import me.whereareiam.tabster.core.logic.dummyplayer.DummyPlayerStorage;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.TabCompleteEvent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.event.EventHandler;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@Singleton
 public class TabCompleteListener implements Listener, me.whereareiam.tabster.core.listener.listeners.player.TabCompleteListener {
 	private final DummyPlayerStorage dummyPlayerStorage;
 	private final TabCompleteHandler tabCompleteHandler;
@@ -26,12 +23,14 @@ public class TabCompleteListener implements Listener, me.whereareiam.tabster.cor
 	}
 
 	@EventHandler
-	public void onAsyncTabCompleteEvent(TabCompleteEvent event) {
-		Player player = (Player) event.getSender();
+	public void onTabCompleteEvent(TabCompleteEvent event) {
+		if (!(event.getReceiver() instanceof ProxiedPlayer player))
+			return;
 
+		Set<String> commands = event.getSuggestions().stream().map(s -> event.getCursor().substring(1) + s).collect(Collectors.toSet());
 		Set<String> completions = onTabComplete(
 				dummyPlayerStorage.getDummyPlayer(player.getName()),
-				new HashSet<>(List.of(event.getBuffer().substring(1)))
+				commands
 		);
 
 		if (completions.isEmpty()) {

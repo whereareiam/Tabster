@@ -17,7 +17,7 @@ import java.nio.file.Path;
 @Plugin(
 		id = "tabster",
 		name = "Tabster",
-		version = "1.0.0",
+		version = "2.0.0",
 		authors = {
 				"whereareiam"
 		}

@@ -1,0 +1,6 @@
+name: ${project.parent.artifactId}
+author: whereareiam
+version: ${project.parent.version}
+main: me.whereareiam.tabster.waterfall.TabsterWaterfall
+softDepends:
+  - LuckPerms
