@@ -32,7 +32,7 @@
 
         <!-- core -->
         <acf.version>0.5.1</acf.version>
-        <adventure.version>4.15.0</adventure.version>
+        <adventure.version>4.16.0</adventure.version>
         <luckperms.version>5.4</luckperms.version>
 
         <!-- velocity -->
